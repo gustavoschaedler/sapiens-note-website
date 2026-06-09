@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: sapiens-note-website:latest
+    container_name: sapiens-note-website
+    restart: unless-stopped
+    # nginx listens on 8080 inside (non-root). Host port via SAPIENS_PORT (.env).
+    # For Cloudflare-Tunnel-only access, set SAPIENS_BIND=127.0.0.1 (.env) so the
+    # site is reachable only locally + via the tunnel (not on the LAN).
+    ports:
+      - "${SAPIENS_BIND:-0.0.0.0}:${SAPIENS_PORT:-80}:8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true

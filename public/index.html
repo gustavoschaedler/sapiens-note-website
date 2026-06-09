@@ -7,10 +7,8 @@
 <meta name="description" data-i18n="meta.desc"
       content="Sapiens Note — um gravador de notas de voz com IA, minimalista e offline-first, em uma tela e-ink de 1,54&quot;.">
 <link rel="icon" type="image/png" href="assets/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -477,8 +475,8 @@
 <!-- Live 3D model (Three.js) — the USER-PROVIDED case (.3mf), exploded view -->
 <script type="importmap">
 { "imports": {
-  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  "three": "./assets/vendor/three/three.module.js",
+  "three/addons/": "./assets/vendor/three/addons/"
 }}
 </script>
 <script type="module">
@@ -606,6 +604,6 @@ if (mount && location.protocol !== 'file:') {
 }
 </script>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

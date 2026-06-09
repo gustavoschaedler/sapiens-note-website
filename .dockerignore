@@ -1,0 +1,12 @@
+.git
+.gitignore
+*.md
+LICENSE
+logos
+docker-compose.yml
+deploy/install.sh
+deploy/uninstall.sh
+deploy/DEPLOY.md
+.env
+.DS_Store
+**/.DS_Store
