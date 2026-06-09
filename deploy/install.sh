@@ -32,10 +32,14 @@ fi
 docker compose version >/dev/null 2>&1 || err "Docker Compose plugin missing (install 'docker-compose-plugin')."
 systemctl enable --now docker >/dev/null 2>&1 || true
 
-# ---- 2. Copy project to /opt ----------------------------------------------
-log "Installing files to ${INSTALL_DIR}…"
-mkdir -p "${INSTALL_DIR}"
-cp -rf "${REPO}/public" "${REPO}/deploy" "${REPO}/docker-compose.yml" "${REPO}/.dockerignore" "${INSTALL_DIR}/"
+# ---- 2. Copy project to /opt (skip if cloned directly into INSTALL_DIR) -----
+if [ "${REPO}" = "${INSTALL_DIR}" ]; then
+  log "Project already at ${INSTALL_DIR} (cloned in place) — skipping copy."
+else
+  log "Installing files to ${INSTALL_DIR}…"
+  mkdir -p "${INSTALL_DIR}"
+  cp -rf "${REPO}/public" "${REPO}/deploy" "${REPO}/docker-compose.yml" "${REPO}/.dockerignore" "${INSTALL_DIR}/"
+fi
 cat > "${INSTALL_DIR}/.env" <<EOF
 SAPIENS_PORT=${PORT}
 SAPIENS_BIND=${BIND}
