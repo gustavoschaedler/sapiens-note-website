@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sapiens Note — AI voice notes on e-ink</title>
+<meta name="description" data-i18n="meta.desc"
+      content="Sapiens Note — um gravador de notas de voz com IA, minimalista e offline-first, em uma tela e-ink de 1,54&quot;.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ambient background -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+<div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top">
+    <img src="assets/logo.png" alt="Sapiens Note" class="nav__logo">
+    <span>Sapiens<span class="accent">Note</span></span>
+  </a>
+  <nav class="nav__links" id="navLinks">
+    <a href="#product" data-i18n="nav.product">Produto</a>
+    <a href="#features" data-i18n="nav.features">Recursos</a>
+    <a href="#how" data-i18n="nav.how">Como funciona</a>
+    <a href="#web" data-i18n="nav.web">Sapiens Web</a>
+    <a href="#compare" data-i18n="nav.compare">Comparação</a>
+    <a href="#inside" data-i18n="nav.inside">Hardware</a>
+    <a href="#model" data-i18n="nav.model">Live 3D</a>
+    <a href="#specs" data-i18n="nav.specs">Specs</a>
+    <a href="#faq" data-i18n="nav.faq">FAQ</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="eink-toggle" id="einkToggle" data-i18n-title="eink.title" title="Alternar modo e-ink" aria-pressed="false">
+      <span class="eink-toggle__ic" aria-hidden="true">◐</span><span data-i18n="eink.label">E-ink</span>
+    </button>
+    <div class="lang" role="group" aria-label="Language">
+      <button class="lang__btn is-active" data-lang="pt">PT</button>
+      <button class="lang__btn" data-lang="en">EN</button>
+    </div>
+    <a class="btn btn--ghost" href="https://github.com/gustavoschaedler/sapiens-note" target="_blank" rel="noopener">GitHub ↗</a>
+    <button class="nav__burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__copy reveal">
+    <img src="assets/logo.png" alt="Sapiens Note" class="hero__logo">
+    <span class="pill"><span class="pill__dot"></span><span data-i18n="hero.pill">Notas de voz com IA · open-source · offline-first</span></span>
+    <h1 class="hero__title">
+      <span data-i18n="hero.title1">Fale sua ideia.</span><br>
+      <span class="grad" data-i18n="hero.title2">Esqueça o resto.</span>
+    </h1>
+    <p class="hero__sub" data-i18n="hero.sub">
+      Um gravador de notas de voz com IA numa tela e-ink de 1,54". Aperte um botão,
+      fale, guarde no bolso. Depois a nota volta transcrita — sem nunca abrir o celular.
+    </p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#product" data-i18n="hero.cta1">Conheça o produto</a>
+      <a class="btn btn--ghost" href="#compare" data-i18n="hero.cta2">Comparar no mercado</a>
+    </div>
+    <ul class="hero__stats">
+      <li><b>200×200</b><span data-i18n="hero.stat1">e-ink mono</span></li>
+      <li><b>16&nbsp;kHz</b><span data-i18n="hero.stat2">captura local</span></li>
+      <li><b>0</b><span data-i18n="hero.stat3">assinaturas</span></li>
+      <li><b>100%</b><span data-i18n="hero.stat4">offline-first</span></li>
+    </ul>
+  </div>
+
+  <div class="hero__device reveal">
+    <div class="device">
+      <div class="device__screen">
+        <img src="assets/sim-home.png" alt="Sapiens Note home menu">
+      </div>
+      <div class="device__btns"><span></span><span></span></div>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>OFFLINE-FIRST</span><i>◇</i><span>E-INK</span><i>◇</i><span>WHISPER.CPP</span><i>◇</i>
+    <span>OPEN HARDWARE</span><i>◇</i><span>NO SUBSCRIPTION</span><i>◇</i><span>PRIVACY BY DESIGN</span><i>◇</i>
+    <span>ESP32-S3</span><i>◇</i><span>YOUR DATA, LOCAL</span><i>◇</i>
+    <span>OFFLINE-FIRST</span><i>◇</i><span>E-INK</span><i>◇</i><span>WHISPER.CPP</span><i>◇</i>
+    <span>OPEN HARDWARE</span><i>◇</i><span>NO SUBSCRIPTION</span><i>◇</i><span>PRIVACY BY DESIGN</span><i>◇</i>
+    <span>ESP32-S3</span><i>◇</i><span>YOUR DATA, LOCAL</span><i>◇</i>
+  </div>
+</div>
+
+<!-- ============ PRODUCT ============ -->
+<section class="section" id="product">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="product.eyebrow">O produto</span>
+    <h2 data-i18n="product.title">Um dispositivo. Uma intenção: capturar a ideia.</h2>
+    <p data-i18n="product.sub">Sem feed, sem notificações, sem distração. Tela e-ink de alto contraste,
+       dias de bateria e uma interface de segundos.</p>
+  </div>
+  <div class="shots">
+    <figure class="shot reveal">
+      <div class="shot__frame"><img src="assets/sim-home.png" alt="Menu"></div>
+      <figcaption><b data-i18n="product.s1t">Menu inicial</b><span data-i18n="product.s1d">Notes · Sync · Tags · Settings, com flash de inversão e-ink ao toque.</span></figcaption>
+    </figure>
+    <figure class="shot reveal">
+      <div class="shot__frame"><img src="assets/sim-list.png" alt="Lista"></div>
+      <figcaption><b data-i18n="product.s2t">Gravações</b><span data-i18n="product.s2d">Contador, bateria, paginação e marquee para títulos longos.</span></figcaption>
+    </figure>
+    <figure class="shot reveal">
+      <div class="shot__frame"><img src="assets/sim-detail.png" alt="Transcrição"></div>
+      <figcaption><b data-i18n="product.s3t">Transcrição</b><span data-i18n="product.s3d">Texto completo em rolagem infinita; toque para pausar/continuar.</span></figcaption>
+    </figure>
+    <figure class="shot reveal">
+      <div class="shot__frame"><img src="assets/sim-rec.png" alt="Gravando"></div>
+      <figcaption><b data-i18n="product.s4t">Gravando</b><span data-i18n="product.s4d">Timer grande e botão STOP — nunca há dúvida se o mic está ativo.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="features.eyebrow">Recursos</span>
+    <h2 data-i18n="features.title">Pensado para capturar, não para prender atenção</h2>
+  </div>
+  <div class="grid">
+    <article class="card reveal">
+      <div class="card__ic">🎙️</div>
+      <h3 data-i18n="feat.1t">Captura em um toque</h3>
+      <p data-i18n="feat.1d">Grava áudio 16 kHz mono, salvo localmente primeiro. A rede nunca é necessária para gravar.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">🔋</div>
+      <h3 data-i18n="feat.2t">E-ink, dias de bateria</h3>
+      <p data-i18n="feat.2d">Tela de 200×200 que segura a imagem com zero energia. Pensada para uso em segundos.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">📜</div>
+      <h3 data-i18n="feat.3t">Transcrição na tela</h3>
+      <p data-i18n="feat.3d">Texto completo preenche a tela em rolagem infinita; toque para pausar e continuar.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">🧠</div>
+      <h3 data-i18n="feat.4t">IA plugável</h3>
+      <p data-i18n="feat.4d">whisper.cpp local (offline) ou a API da OpenAI — você escolhe. Troque o motor sem mexer no app.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">🔒</div>
+      <h3 data-i18n="feat.5t">Privacidade por design</h3>
+      <p data-i18n="feat.5d">Todos os dados ficam locais. Sem contas, sem multi-tenant, sem lock-in na nuvem.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">🌐</div>
+      <h3 data-i18n="feat.6t">Dashboard web local</h3>
+      <p data-i18n="feat.6d">Toque, baixe o .wav, transcreva/re-transcreva e veja o espectro de áudio — tudo na sua máquina.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">🏷️</div>
+      <h3 data-i18n="feat.7t">Tags & player</h3>
+      <p data-i18n="feat.7d">Organize por tags e reproduza com play/pause/stop e barra de progresso embutidos.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__ic">⚙️</div>
+      <h3 data-i18n="feat.8t">Aberto & hackeável</h3>
+      <p data-i18n="feat.8d">Núcleo C++ compartilhado, dois simuladores desktop e firmware ESP-IDF. Sem caixa-preta.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="how.eyebrow">Como funciona</span>
+    <h2 data-i18n="how.title">Da fala ao texto em três passos</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <span class="step__n">01</span>
+      <h3 data-i18n="how.1t">Capture (offline)</h3>
+      <p data-i18n="how.1d">Aperte o botão e fale. O áudio vai para o cartão como WAV 16 kHz. Funciona sem nenhuma rede.</p>
+    </div>
+    <div class="step__arrow" aria-hidden="true">→</div>
+    <div class="step reveal">
+      <span class="step__n">02</span>
+      <h3 data-i18n="how.2t">Transcreva (você escolhe)</h3>
+      <p data-i18n="how.2d">No dashboard local, transcreva com whisper.cpp (offline) ou OpenAI. O texto volta pelo núcleo.</p>
+    </div>
+    <div class="step__arrow" aria-hidden="true">→</div>
+    <div class="step reveal">
+      <span class="step__n">03</span>
+      <h3 data-i18n="how.3t">Leia no e-ink</h3>
+      <p data-i18n="how.3d">A nota aparece transcrita no dispositivo, com rolagem automática — sem abrir o celular.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAPIENS WEB ============ -->
+<section class="section" id="web">
+  <div class="section__head reveal">
+    <span class="eyebrow">Sapiens Web</span>
+    <h2 data-i18n="web.title">O dashboard que transcreve — na sua máquina</h2>
+    <p data-i18n="web.sub">Um app web local (um único binário C++) que lê o mesmo banco do dispositivo.
+       Toque, baixe, transcreva e veja o espectro — sem nuvem obrigatória.</p>
+  </div>
+  <div class="web">
+    <div class="web__mock reveal">
+      <div class="browser">
+        <div class="browser__bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="browser__url">127.0.0.1:8080</span>
+        </div>
+        <div class="browser__body">
+          <div class="dash">
+            <div class="dash__head">
+              <img src="assets/logo.png" alt="">
+              <div>
+                <b>Sapiens Note</b>
+                <small>local dashboard · engine: whisper · v0.1.0</small>
+              </div>
+            </div>
+            <div class="dash__row">
+              <span class="dash__n">0001</span>
+              <span class="dash__title">Jun 07, 11:48</span>
+              <span class="badge badge--ok" data-i18n="web.badge.done">Transcrito</span>
+              <span class="dash__btns">▶&nbsp; ⭳&nbsp; ↻</span>
+            </div>
+            <div class="dash__wave" aria-hidden="true">
+              <i style="height:30%"></i><i style="height:62%"></i><i style="height:88%"></i><i style="height:54%"></i>
+              <i style="height:74%"></i><i style="height:40%"></i><i style="height:96%"></i><i style="height:58%"></i>
+              <i style="height:34%"></i><i style="height:70%"></i><i style="height:48%"></i><i style="height:82%"></i>
+              <i style="height:60%"></i><i style="height:38%"></i><i style="height:66%"></i><i style="height:44%"></i>
+            </div>
+            <div class="dash__row">
+              <span class="dash__n">0002</span>
+              <span class="dash__title">Jun 07, 00:49</span>
+              <span class="badge" data-i18n="web.badge.pending">Pendente</span>
+              <span class="dash__btns">▶&nbsp; ⭳&nbsp; ↻</span>
+            </div>
+            <div class="dash__prog" aria-hidden="true"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="web__copy reveal">
+      <ul class="web__list">
+        <li data-i18n="web.f1">Reproduz cada gravação no navegador, com espectro de áudio ao vivo.</li>
+        <li data-i18n="web.f2">Baixa o .wav (com tamanho) e a transcrição .txt.</li>
+        <li data-i18n="web.f3">Transcreve / re-transcreve por gravação, com barra de progresso.</li>
+        <li data-i18n="web.f4">Motor plugável: whisper.cpp (offline), OpenAI ou fake (demo).</li>
+        <li data-i18n="web.f5">Lê o mesmo SQLite do dispositivo — o resultado volta para o aparelho.</li>
+        <li data-i18n="web.f6">Roda 100% local em http://127.0.0.1:8080. Sem conta, sem upload.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section class="section" id="compare">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="compare.eyebrow">Comparação</span>
+    <h2 data-i18n="compare.title">Como o Sapiens Note se posiciona</h2>
+    <p data-i18n="compare.sub">A maioria dos gravadores com IA é fechada, exige nuvem e cobra assinatura.
+       O Sapiens Note inverte isso: local, aberto e seu.</p>
+  </div>
+  <div class="table-wrap reveal">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th data-i18n="cmp.feature">Característica</th>
+          <th class="cmp__us">Sapiens Note</th>
+          <th>Plaud Note</th>
+          <th>Limitless Pendant</th>
+          <th>Otter.ai</th>
+          <th>Rabbit R1</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="cmp.r1">Captura 100% offline</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="ok">✓</i></td><td><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="mid">~</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r2">Transcrição local (sem nuvem)</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r3">Dados ficam no seu hardware</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r4">Sem assinatura para o essencial</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="mid">~</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r5">Tela e-ink para leitura</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r6">Lê a transcrição no aparelho</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="mid">~</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r7">Motor de IA plugável</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td>
+        </tr>
+        <tr>
+          <td data-i18n="cmp.r8">Open source / hackeável</td>
+          <td class="cmp__us"><i class="ok">✓</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td><td><i class="no">✕</i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote" data-i18n="cmp.note">Comparação baseada em informações públicas dos produtos (2026); ofertas dos concorrentes podem mudar. “~” = parcial/depende da configuração.</p>
+</section>
+
+<!-- ============ WHAT'S INSIDE ============ -->
+<section class="section" id="inside">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="inside.eyebrow">O que tem dentro</span>
+    <h2 data-i18n="inside.title">Hardware aberto, sem a case</h2>
+    <p data-i18n="inside.sub">O coração do produto é a placa ESP32-S3-ePaper-1.54 — sem a case original do Pala Note. Tudo o que importa, em ~40 mm.</p>
+  </div>
+  <div class="inside reveal">
+    <svg viewBox="0 0 1200 1180" class="xray" role="img" aria-label="ESP32-S3-ePaper-1.54 exploded view">
+      <image href="assets/exploded.png" x="0" y="0" width="1200" height="1180"/>
+      <g class="cal">
+        <!-- left: display + front housing -->
+        <line x1="252" y1="442" x2="276" y2="510"/><circle cx="276" cy="510" r="6"/>
+        <text class="cal__t cal__r" x="238" y="432" data-i18n="inside.k1t">Tela e-Paper 1,54" + FT6336</text>
+        <text class="cal__s cal__r" x="238" y="458" data-i18n="inside.k1s">200×200 mono · toque (I²C)</text>
+
+        <line x1="252" y1="650" x2="278" y2="590"/><circle cx="278" cy="590" r="6"/>
+        <text class="cal__t cal__r" x="238" y="644" data-i18n="inside.k2t">Carcaça frontal</text>
+        <text class="cal__s cal__r" x="238" y="670" data-i18n="inside.k2s">case impressa em 3D</text>
+
+        <!-- top: main board + buttons -->
+        <line x1="450" y1="392" x2="480" y2="522"/><circle cx="480" cy="522" r="6"/>
+        <text class="cal__t cal__m" x="430" y="354" data-i18n="inside.k3t">Placa ESP32-S3-PICO-1</text>
+        <text class="cal__s cal__m" x="430" y="380" data-i18n="inside.k3s">8 MB · ES8311 · SHTC3 · RTC</text>
+
+        <line x1="772" y1="346" x2="544" y2="496"/><circle cx="544" cy="496" r="6"/>
+        <text class="cal__t cal__m" x="800" y="312" data-i18n="inside.k4t">Botões BOOT + PWR</text>
+        <text class="cal__s cal__m" x="800" y="338" data-i18n="inside.k4s">ligar · boot</text>
+
+        <!-- bottom: I/O -->
+        <line x1="476" y1="800" x2="528" y2="640"/><circle cx="528" cy="640" r="6"/>
+        <text class="cal__t cal__m" x="476" y="828" data-i18n="inside.k5t">microSD + USB-C</text>
+        <text class="cal__s cal__m" x="476" y="854" data-i18n="inside.k5s">armazenamento · carga</text>
+
+        <!-- right: battery + back housing -->
+        <line x1="966" y1="596" x2="706" y2="632"/><circle cx="706" cy="632" r="6"/>
+        <text class="cal__t" x="980" y="586" data-i18n="inside.k6t">Bateria Li</text>
+        <text class="cal__s" x="980" y="612" data-i18n="inside.k6s">conector MX1.25</text>
+
+        <line x1="966" y1="712" x2="840" y2="648"/><circle cx="840" cy="648" r="6"/>
+        <text class="cal__t" x="980" y="702" data-i18n="inside.k7t">Carcaça traseira</text>
+        <text class="cal__s" x="980" y="728" data-i18n="inside.k7s">encaixe (snap-fit)</text>
+      </g>
+    </svg>
+  </div>
+  <p class="footnote" data-i18n="inside.note">Render da sua case impressa em 3D, montada com o hardware dentro. Veja girando na seção Live 3D.</p>
+</section>
+
+<!-- ============ LIVE 3D MODEL ============ -->
+<section class="section" id="model">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="model.eyebrow">Modelo 3D</span>
+    <h2>Live 3D Model</h2>
+    <p data-i18n="model.sub">Arraste para girar. Role para dar zoom. Só o hardware — sem a case.</p>
+  </div>
+  <div class="viewer reveal" id="viewer">
+    <div class="viewer__modes">
+      <button class="vmode is-active" data-mode="assembled" data-i18n="model.assembled">Montada</button>
+      <button class="vmode" data-mode="exploded" data-i18n="model.exploded">Explodida</button>
+    </div>
+    <span class="viewer__msg viewer__msg--load" data-i18n="model.loading">Carregando modelo 3D…</span>
+    <span class="viewer__msg viewer__msg--fail" data-i18n="model.fallback">Não foi possível carregar o 3D (precisa de internet para o Three.js).</span>
+    <span class="viewer__hint" data-i18n="model.hint">Arraste para girar</span>
+  </div>
+</section>
+
+<!-- ============ SPECS ============ -->
+<section class="section" id="specs">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="specs.eyebrow">Ficha técnica</span>
+    <h2 data-i18n="specs.title">Hardware aberto, alvo único</h2>
+    <p data-i18n="specs.sub">Baseado na placa Waveshare ESP32-S3 1,54" e-Paper (variante touch).</p>
+  </div>
+  <div class="specs">
+    <div class="spec reveal"><b data-i18n="spec.mcu">MCU</b><span>ESP32-S3 · dual-core LX7 @ 240 MHz</span></div>
+    <div class="spec reveal"><b data-i18n="spec.display">Tela</b><span>1,54" e-paper · 200×200 · mono</span></div>
+    <div class="spec reveal"><b data-i18n="spec.audio">Áudio</b><span>ES8311 · mic + alto-falante · 16 kHz mono</span></div>
+    <div class="spec reveal"><b data-i18n="spec.touch">Toque</b><span>FT6336 capacitivo (I²C)</span></div>
+    <div class="spec reveal"><b data-i18n="spec.storage">Armazenamento</b><span>microSD (FAT32) · SQLite local</span></div>
+    <div class="spec reveal"><b data-i18n="spec.power">Energia</b><span>bateria Li · deep-sleep · dias de uso</span></div>
+    <div class="spec reveal"><b data-i18n="spec.wireless">Sem fio</b><span>Wi-Fi 2.4 GHz · Bluetooth 5 LE</span></div>
+    <div class="spec reveal"><b data-i18n="spec.sw">Software</b><span>C++23 · núcleo compartilhado · 2 simuladores</span></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="section__head reveal">
+    <span class="eyebrow">FAQ</span>
+    <h2 data-i18n="faq.title">Perguntas frequentes</h2>
+  </div>
+  <div class="faq">
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q1">Preciso de internet para usar?</summary>
+      <p data-i18n="faq.a1">Não para gravar. A captura é 100% offline; só a transcrição pode usar rede — e mesmo ela roda offline com whisper.cpp.</p>
+    </details>
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q2">Minhas gravações vão para a nuvem?</summary>
+      <p data-i18n="faq.a2">Não por padrão. Tudo fica local (SQLite + WAV). Só sai da sua máquina se você escolher o motor OpenAI.</p>
+    </details>
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q3">Tem assinatura ou mensalidade?</summary>
+      <p data-i18n="faq.a3">Não. O essencial é gratuito e open-source. Você só paga (à OpenAI) se optar por esse motor de transcrição.</p>
+    </details>
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q4">Posso testar sem comprar o hardware?</summary>
+      <p data-i18n="faq.a4">Sim. Há dois simuladores desktop (SDL2 e LVGL 9) que rodam a mesma UI e lógica do dispositivo, mais o dashboard web.</p>
+    </details>
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q5">Qual é o hardware alvo?</summary>
+      <p data-i18n="faq.a5">A placa Waveshare ESP32-S3 1,54" e-Paper (variante touch): tela mono 200×200, codec de áudio ES8311, microSD e bateria.</p>
+    </details>
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q6">Em quais idiomas ele transcreve?</summary>
+      <p data-i18n="faq.a6">Depende do modelo whisper escolhido — os modelos multilíngues cobrem dezenas de idiomas, incluindo português e inglês, com detecção automática.</p>
+    </details>
+    <details class="faq__item reveal">
+      <summary data-i18n="faq.q7">É realmente open source?</summary>
+      <p data-i18n="faq.a7">Sim. Núcleo C++, simuladores e firmware ESP-IDF estão no GitHub. Você pode ler, modificar e construir o seu.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="cta__inner reveal">
+    <h2 data-i18n="cta.title">Aberto. Local. Seu.</h2>
+    <p data-i18n="cta.sub">Explore o código, rode os simuladores no desktop e construa o seu Sapiens Note.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="https://github.com/gustavoschaedler/sapiens-note" target="_blank" rel="noopener" data-i18n="cta.btn1">Ver no GitHub ↗</a>
+      <a class="btn btn--ghost" href="#top" data-i18n="cta.btn2">Voltar ao topo</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__brand">
+    <img src="assets/logo.png" alt="Sapiens Note">
+    <span>Sapiens<span class="accent">Note</span></span>
+  </div>
+  <p data-i18n="footer.tag">Notas de voz com IA, minimalistas e offline-first, numa tela e-ink.</p>
+  <small>© <span id="year"></span> Sapiens Note · <span data-i18n="footer.made">feito com foco em privacidade</span></small>
+</footer>
+
+<!-- Live 3D model (Three.js) — the USER-PROVIDED case (.3mf), exploded view -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { ThreeMFLoader } from 'three/addons/loaders/3MFLoader.js';
+
+const mount = document.getElementById('viewer');
+// The 3D needs HTTP: file:// blocks ES modules + fetching the local .3mf files.
+if (mount && location.protocol === 'file:') mount.classList.add('failed');
+if (mount && location.protocol !== 'file:') {
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 5000);
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  mount.appendChild(renderer.domElement);
+
+  // bright multi-light rig (no IBL, so it renders everywhere) so the matte case pops
+  scene.add(new THREE.HemisphereLight(0xeaf1ff, 0x2a2f3a, 2.0));
+  const key   = new THREE.DirectionalLight(0xffffff, 3.2); key.position.set(60, 90, 70);   scene.add(key);
+  const rim   = new THREE.DirectionalLight(0x9b7cff, 2.4); rim.position.set(-80, -10, -60);  scene.add(rim);
+  const fill  = new THREE.DirectionalLight(0x22d3ee, 1.4); fill.position.set(-50, 50, 60);   scene.add(fill);
+  const front = new THREE.DirectionalLight(0xffffff, 1.6); front.position.set(20, 20, 140);  scene.add(front);
+
+  const root = new THREE.Group(); scene.add(root);
+  const ctl = new OrbitControls(cam, renderer.domElement);
+  ctl.enablePan = false; ctl.enableDamping = true; ctl.dampingFactor = 0.08;
+  ctl.autoRotate = true; ctl.autoRotateSpeed = 1.3;
+
+  const shellTop = new THREE.MeshStandardMaterial({ color:0x6b7688, metalness:0.1, roughness:0.6 });
+  const shellBot = new THREE.MeshStandardMaterial({ color:0x444b5a, metalness:0.1, roughness:0.62 });
+  const btnMat   = new THREE.MeshStandardMaterial({ color:0x9b7cff, metalness:0.1, roughness:0.45 });
+  const pcbMat   = new THREE.MeshStandardMaterial({ color:0x0e3a2c, metalness:0.2, roughness:0.55 });
+  const batMat   = new THREE.MeshStandardMaterial({ color:0x3b3f48, metalness:0.45, roughness:0.4 });
+
+  // device screens cycled on the e-ink panel — same shots as the Product section
+  const texLoader = new THREE.TextureLoader();
+  const shots = ['assets/sim-home.png','assets/sim-list.png','assets/sim-detail.png','assets/sim-rec.png']
+    .map(u => { const t = texLoader.load(u); t.colorSpace = THREE.SRGBColorSpace; return t; });
+  const screenMat = new THREE.MeshBasicMaterial({ map: shots[0] });   // unlit -> always crisp
+
+  const loader = new ThreeMFLoader();
+  const load = u => new Promise((res, rej) => loader.load(u, res, undefined, rej));
+  const V = () => new THREE.Vector3();
+  const ctr = o => new THREE.Box3().setFromObject(o).getCenter(V());
+  const siz = o => new THREE.Box3().setFromObject(o).getSize(V());
+
+  // explode state: each mover lerps between assembled (a) and exploded (e) positions
+  const movers = [];
+  const mover = (o, ex) => movers.push({ o, a: o.position.clone(), e: o.position.clone().add(ex) });
+  let explodeT = 0, explodeTarget = 0;
+
+  Promise.all([
+    load('assets/case/back_housing.3mf'),
+    load('assets/case/front_housing.3mf'),
+    load('assets/case/button.3mf')
+  ]).then(([back, front, btn]) => {
+    [[back, shellBot], [front, shellTop], [btn, btnMat]].forEach(([o, m]) =>
+      o.traverse(x => { if (x.isMesh) { x.material = m; x.geometry.computeVertexNormals(); } }));
+
+    // back + buttons are already mated in the file's coords; front was shifted aside
+    // for printing -> overlay it on the back footprint, flip it and close on top.
+    root.add(back, btn);
+    const cB = ctr(back), sB = siz(back), cF = ctr(front), sF = siz(front);
+    const piv = new THREE.Group();
+    front.position.sub(cF); piv.add(front);
+    piv.rotation.x = Math.PI;
+    piv.position.set(cB.x, cB.y, cB.z + sB.z / 2 + sF.z / 2);
+    root.add(piv);
+
+    const seamZ = cB.z + sB.z / 2, scrY = cB.y + 3;
+    // hardware inside: PCB, Li-battery, and the cycling e-ink screen
+    const pcb = new THREE.Mesh(new THREE.BoxGeometry(Math.min(sB.x, sF.x) - 7, Math.min(sB.y, sF.y) - 7, 2.0), pcbMat);
+    pcb.position.set(cB.x, cB.y, seamZ - 1.5); root.add(pcb);
+    const bat = new THREE.Mesh(new THREE.BoxGeometry(Math.min(sB.x, sF.x) - 12, Math.min(sB.y, sF.y) - 16, 5), batMat);
+    bat.position.set(cB.x, cB.y - 4, seamZ - 5.5); root.add(bat);
+    const screen = new THREE.Mesh(new THREE.PlaneGeometry(31, 31), screenMat);
+    screen.position.set(cB.x, scrY, seamZ + sF.z - 0.9); root.add(screen);
+
+    // center the assembly at origin
+    const box = new THREE.Box3().setFromObject(root);
+    const sph = box.getBoundingSphere(new THREE.Sphere());
+    const r = sph.radius, c = sph.center;
+    root.position.sub(c); ctl.target.set(0, 0, 0);
+
+    // exploded offsets (along the case-thickness Z; buttons out in X)
+    mover(piv,    new THREE.Vector3(0, 0,  24));
+    mover(screen, new THREE.Vector3(0, 0,  16));
+    mover(pcb,    new THREE.Vector3(0, 0,   3));
+    mover(bat,    new THREE.Vector3(0, 0, -12));
+    mover(back,   new THREE.Vector3(0, 0, -24));
+    mover(btn,    new THREE.Vector3(28, 0, 10));
+
+    // fit camera a bit wider so the exploded view also fits
+    const dist = r / Math.sin((cam.fov * Math.PI / 180) / 2) * 1.35;
+    cam.position.set(dist * 0.42, dist * 0.30, dist * 0.92);
+    cam.near = r / 100; cam.far = r * 100; cam.updateProjectionMatrix();
+    ctl.minDistance = r * 1.1; ctl.maxDistance = r * 5;
+
+    // cycle the device screens
+    let si = 0;
+    setInterval(() => { si = (si + 1) % shots.length; screenMat.map = shots[si]; screenMat.needsUpdate = true; }, 2600);
+
+    // assembled <-> exploded toggle
+    document.querySelectorAll('.vmode').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.vmode').forEach(x => x.classList.toggle('is-active', x === b));
+      explodeTarget = b.dataset.mode === 'exploded' ? 1 : 0;
+    }));
+
+    mount.classList.add('ready');
+  }).catch(err => { console.error('3MF load failed', err); mount.classList.add('failed'); });
+
+  function resize() {
+    const w = mount.clientWidth, h = mount.clientHeight || 420;
+    renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener('resize', resize);
+  (function loop(){
+    requestAnimationFrame(loop);
+    explodeT += (explodeTarget - explodeT) * 0.08;
+    const s = explodeT * explodeT * (3 - 2 * explodeT);     // smoothstep
+    for (const m of movers) m.o.position.lerpVectors(m.a, m.e, s);
+    ctl.update(); renderer.render(scene, cam);
+  })();
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
