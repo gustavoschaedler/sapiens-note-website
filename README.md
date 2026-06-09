@@ -28,7 +28,7 @@
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Neon theme</b></sub></td>
+    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Graphite &amp; Signal</b> (default)</sub></td>
     <td align="center"><img src="docs/preview-eink.png" width="380"><br><sub><b>E-ink mode</b> (one click)</sub></td>
   </tr>
 </table>
@@ -37,11 +37,14 @@
 
 ## ✨ Overview
 
-A **static** product landing page — no build step, no framework — with a
-futuristic look and an **e-ink mode** that flips the whole site into the device's
-black-and-white aesthetic. **Bilingual** (English / Portuguese) with live
-switching, and **fully offline**: Three.js and the web fonts are vendored
-locally, so there are **no CDN dependencies**.
+A **static** product landing page — no build step, no framework. The default
+**"Graphite & Signal"** theme is a warm graphite *device console* grounded in the
+product's own world: e-ink "paper" panels, a fine e-ink pixel-dither texture and a
+single signal-red accent (the *record* signal — REC dot, live waveform, the record
+button). A one-click **e-ink mode** then flips the whole site into the device's flat
+black-and-white aesthetic. **Bilingual** (English / Portuguese) with live switching,
+and **fully offline**: Three.js and the web fonts are vendored locally, so there are
+**no CDN dependencies**.
 
 Content and specs are based on the **Sapiens Note** project and the real
 **Waveshare ESP32-S3-ePaper-1.54** board (touch variant).
@@ -51,7 +54,8 @@ Content and specs are based on the **Sapiens Note** project and the real
 | | Feature |
 |---|---|
 | 🌐 | **Bilingual EN / PT-BR** — top toggle, auto-detects the browser language, remembers the choice. |
-| 🌗 | **E-ink mode** — swaps the dark neon theme for the device's paper look. Persistent + shareable (`?eink=1`). |
+| 🎨 | **"Graphite & Signal" theme** — warm graphite console, e-ink paper panels, pixel-dither texture, one signal-red accent. Mono "device voice" type. |
+| 🌗 | **E-ink mode** — swaps the graphite console for the device's flat paper look (hard-shadow, monochrome). Persistent + shareable (`?eink=1`). |
 | 🧠 | **Live 3D model** — interactive case (Three.js + `ThreeMFLoader`) from the real `.3mf` files, with **Assembled ⇄ Exploded** toggle, auto-rotation and the screen cycling app shots. |
 | 🔩 | **"What's Inside"** — *flipper.net*-style exploded view with a detailed board and callouts to the real parts (ESP32-S3-PICO-1, ES8311, FT6336, SHTC3, PCF85063, microSD/USB-C, Li battery…). |
 | 📊 | **Comparison** with market players (Plaud Note, Limitless, Otter.ai, Rabbit R1). |
@@ -120,7 +124,7 @@ Full guide — updates, **Cloudflare Tunnel**, firewall, hardening:
 
 ## 🎨 Customization
 
-- **Theme / colors** — CSS variables at the top of `public/css/styles.css` (`:root`, `body.eink`).
+- **Theme / colors** — design tokens at the top of `public/css/styles.css` (`:root` for *Graphite & Signal*, `body.eink` for e-ink). Key tokens: `--bg` (graphite), `--paper` (e-ink panel), `--accent` (signal red), `--ink`, `--muted`.
 - **Text / translations** — the `I18N` object in `public/js/script.js` (`en` / `pt` keys).
 - **What's Inside image / 3D case** — `public/assets/exploded.png` and `public/assets/case/*.3mf`.
 

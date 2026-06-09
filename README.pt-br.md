@@ -28,7 +28,7 @@
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Tema neon</b></sub></td>
+    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Graphite &amp; Signal</b> (padrão)</sub></td>
     <td align="center"><img src="docs/preview-eink.png" width="380"><br><sub><b>Modo e-ink</b> (um clique)</sub></td>
   </tr>
 </table>
@@ -37,9 +37,12 @@
 
 ## ✨ Visão geral
 
-Landing page de produto **estática** — sem build, sem framework — com visual
-futurista e um **modo e-ink** que transforma o site inteiro no preto-e-branco do
-dispositivo. **Bilíngue** (Inglês / Português) com troca em tempo real, e
+Landing page de produto **estática** — sem build, sem framework. O tema padrão
+**"Graphite & Signal"** é um *console* em grafite quente, ancorado no mundo do
+próprio produto: painéis de "papel" e-ink, uma textura fina de pixel-dither e um
+único acento vermelho-sinal (o sinal de *gravar* — ponto REC, waveform, botão de
+gravar). Um **modo e-ink** de um clique transforma o site inteiro no preto-e-branco
+chapado do dispositivo. **Bilíngue** (Inglês / Português) com troca em tempo real, e
 **100% offline**: Three.js e as fontes são vendorizados localmente — **sem CDN**.
 
 Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
@@ -50,7 +53,8 @@ Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
 | | Recurso |
 |---|---|
 | 🌐 | **Bilíngue EN / PT-BR** — toggle no topo, auto-detecta o idioma do navegador, lembra a escolha. |
-| 🌗 | **Modo e-ink** — troca o tema neon escuro pelo visual de papel do device. Persistente + link (`?eink=1`). |
+| 🎨 | **Tema "Graphite & Signal"** — console em grafite quente, painéis de papel e-ink, textura pixel-dither, um único acento vermelho-sinal. Tipografia mono como "voz do aparelho". |
+| 🌗 | **Modo e-ink** — troca o console grafite pelo visual de papel chapado do device (sombra dura, monocromático). Persistente + link (`?eink=1`). |
 | 🧠 | **Modelo 3D ao vivo** — case interativa (Three.js + `ThreeMFLoader`) a partir dos `.3mf` reais, com toggle **Montada ⇄ Explodida**, auto-rotação e a tela passando os screenshots. |
 | 🔩 | **"What's Inside"** — exploded view estilo *flipper.net*, placa detalhada e callouts dos componentes reais (ESP32-S3-PICO-1, ES8311, FT6336, SHTC3, PCF85063, microSD/USB-C, bateria Li…). |
 | 📊 | **Comparação** com players de mercado (Plaud Note, Limitless, Otter.ai, Rabbit R1). |
@@ -119,7 +123,7 @@ Guia completo — atualização, **Cloudflare Tunnel**, firewall, hardening:
 
 ## 🎨 Personalização
 
-- **Tema / cores** — variáveis CSS no topo de `public/css/styles.css` (`:root`, `body.eink`).
+- **Tema / cores** — design tokens no topo de `public/css/styles.css` (`:root` para o *Graphite & Signal*, `body.eink` para o e-ink). Tokens-chave: `--bg` (grafite), `--paper` (painel e-ink), `--accent` (vermelho-sinal), `--ink`, `--muted`.
 - **Textos / traduções** — objeto `I18N` em `public/js/script.js` (chaves `en` / `pt`).
 - **Imagem do What's Inside / case 3D** — `public/assets/exploded.png` e `public/assets/case/*.3mf`.
 
