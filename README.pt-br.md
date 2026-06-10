@@ -40,11 +40,17 @@
 Landing page de produto **estática** — sem build, sem framework. O tema padrão
 **"Datasheet"** usa a linguagem da *engenharia de hardware*: grid de papel milimetrado,
 linhas de cota (dimensões) e um *title block* em volta do device, designadores de
-peça `REF.0x`, labels técnicos em mono e um único acento laranja industrial. Um
-**modo e-ink** de um clique transforma o site inteiro no preto-e-branco chapado do
-dispositivo. **Bilíngue** (Inglês / Português) com troca em tempo real,
+peça `REF.0x`, labels técnicos em mono e um único acento laranja industrial. São
+**três temas de um clique** — **Datasheet** (padrão), **E-ink** (o preto-e-branco
+chapado do dispositivo) e **Escuro** — escolhidos num switch de 3 posições na
+**barra lateral esquerda**. **Bilíngue** (Inglês / Português) com troca em tempo real,
 **responsivo mobile-first**, e **100% offline**: Three.js e as fontes são
 vendorizados localmente — **sem CDN**.
+
+A página traz também dois demos **reais e funcionais** no navegador — um simulador do
+aparelho e o dashboard Sapiens Web — que compartilham um **IndexedDB** local. Tudo o
+que eles fazem fica no navegador; nada é enviado a um servidor (a única exceção é a
+transcrição opcional via OpenAI, que usa a sua própria chave).
 
 Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
 **Waveshare ESP32-S3-ePaper-1.54** (variante touch).
@@ -53,18 +59,20 @@ Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
 
 | | Recurso |
 |---|---|
-| 🌐 | **Bilíngue EN / PT-BR** — toggle no topo, auto-detecta o idioma do navegador, lembra a escolha. |
-| 🎨 | **Tema "Datasheet"** — cara de engenharia: grid milimetrado, linhas de cota, *title block*, designadores `REF.0x`, labels em mono e acento laranja industrial. |
-| 📱 | **Responsivo mobile-first** — ajustado até 375 px (hero empilhado, bloco de stats 2×2, botões full-width, menu que recolhe). |
-| 🌗 | **Modo e-ink** — troca o tema datasheet pelo visual de papel chapado do device (sombra dura, monocromático). Persistente + link (`?eink=1`). |
-| 🧠 | **Modelo 3D ao vivo** — o **case real** (Three.js + `GLTFLoader`, GLB convertido do `Assembled.step` do Shapr3D) + internos fiéis (PCB, módulo PICO, header, USB-C, bateria, tela e-ink), com toggle **Montada ⇄ Explodida** e auto-rotação. |
-| 🔩 | **"What's Inside"** — um **desenho técnico em SVG** baseado no layout real da placa, com callouts de engenharia para as peças de verdade (ESP32-S3-PICO-1, FT6336, ES8311, USB-C, botões BOOT/PWR na lateral, bateria Li-ion…). |
+| 🧭 | **Barra lateral esquerda** — navegação agrupada (*Experimente · Produto · Referência*) com ícones desenhados, destaque da seção atual (scroll-spy) e um recolhimento elegante para barra superior + drawer no mobile. |
+| 🎨 | **Três temas, um switch** — **Datasheet** (cara de engenharia: grid milimetrado, linhas de cota, designadores `REF.0x`, acento laranja), **E-ink** (papel chapado P&B do device) e **Escuro**, num controle de 3 posições. Persistente (`localStorage`); o e-ink também via link (`?eink=1`). |
+| 🌐 | **Bilíngue EN / PT-BR** — botões `English` / `Português` na barra lateral; auto-detecta o idioma do navegador e lembra a escolha. |
+| 🕹️ | **Simulador do device (real)** — o firmware e-ink no navegador, com ícones desenhados (SVG): **REC grava áudio mono em 48 kHz / 16 bits do microfone** (`MediaRecorder`); a nota fica *pendente* (o aparelho só captura — igual ao firmware) e toca de verdade. Todas as telas (Home · Lista · Gravando · Transcrição · Player · Settings · Sync · Tags · Excluir). (`public/js/simulator.js`) |
+| 🖥️ | **Dashboard real (`sapiens-web`)** — porte fiel que lê o **mesmo armazenamento** do aparelho: toca o áudio real com **espectro** ao vivo, **transcreve via OpenAI Whisper** (sua chave, guardada só no navegador), baixa **`.wav`/`.txt`** reais, exclui, pagina. (`public/js/dashboard.js`) |
+| 🔁 | **O fluxo real** — grava no aparelho → transcreve no dashboard → a transcrição volta a aparecer no aparelho, via um **IndexedDB** compartilhado (`public/js/store.js`). |
+| 🔒 | **Local-first / privado** — gravações, notas e transcrições ficam **só no seu navegador** (IndexedDB); nada é enviado a um servidor. Única exceção: se você usar a transcrição, o áudio vai direto para a OpenAI com a sua chave. |
+| 🧠 | **Modelo 3D ao vivo** — o **case real** (Three.js + `GLTFLoader`, GLB convertido do `Assembled.step` do Shapr3D) + internos fiéis (PCB, módulo ESP32-S3, header, USB-C, bateria, tela e-ink), com toggle **Montada ⇄ Explodida** e auto-rotação. |
+| 🔩 | **"What's Inside"** — um **desenho técnico em SVG** da placa real, com callouts de engenharia (ESP32-S3, FT6336, ES8311, USB-C, botões BOOT/PWR, bateria Li-ion…) e link para a página do produto **Waveshare ESP32-S3-ePaper-1.54**. |
 | 📊 | **Comparação** com players de mercado (Plaud Note, Limitless, Otter.ai, Rabbit R1). |
-| 🔌 | **100% offline** — Three.js + fontes locais, zero CDN. |
-| 📱 | **Responsivo** e com `prefers-reduced-motion`. |
+| 📱 | **Responsivo mobile-first** (até 375 px) e com `prefers-reduced-motion`; **100% offline** — Three.js + fontes locais, zero CDN. |
 
-**Seções:** `Hero` · `Produto` · `Recursos` · `Como funciona` · `Sapiens Web`
-· `Comparação` · `What's Inside` · `Live 3D` · `Specs` · `FAQ` · `CTA`
+**Seções:** `Hero` · `Simulador` · `Dashboard` · `Produto` · `Recursos` · `Como funciona`
+· `Sapiens Web` · `Comparação` · `What's Inside` · `Live 3D` · `Specs` · `FAQ` · `CTA`
 
 ## 🛠️ Stack
 
@@ -73,6 +81,17 @@ Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
 - **Google Fonts vendorizadas** em `public/assets/fonts/` — sem CDN.
 - i18n caseiro com `data-i18n` + dicionário em `public/js/script.js`.
 
+## 🔒 Onde ficam os seus dados
+
+Tudo o que os dois demos fazem fica **no seu navegador** — não há backend:
+
+- **Gravações + notas + transcrições** → IndexedDB (banco `sapiens-sim`, object stores
+  `notes` + `audio`), em `public/js/store.js`.
+- **Chave da OpenAI** → `localStorage` (`sn-openai-key`), só no navegador.
+- **Único momento em que algo sai do navegador:** a transcrição envia o áudio direto
+  para `api.openai.com` com a sua chave. Gravar, ouvir, ler e baixar `.wav`/`.txt` é
+  tudo offline. Limpar os dados do site apaga tudo.
+
 ## 📁 Estrutura
 
 ```
@@ -80,7 +99,7 @@ Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
 ├── public/                  ← document root (servido pelo nginx)
 │   ├── index.html
 │   ├── css/styles.css
-│   ├── js/script.js
+│   ├── js/script.js · js/store.js · js/simulator.js · js/dashboard.js
 │   └── assets/
 │       ├── logo.png · sim-*.png
 │       ├── case/assembled.glb   case real (do Assembled.step) + fontes (*.3mf)
@@ -125,7 +144,7 @@ Guia completo — atualização, **Cloudflare Tunnel**, firewall, hardening:
 
 ## 🎨 Personalização
 
-- **Tema / cores** — design tokens no topo de `public/css/styles.css` (`:root` para o *Datasheet*, `body.eink` para o e-ink). Tokens-chave: `--bg` (papel milimetrado), `--accent` (laranja industrial), `--ink`, `--muted`, `--line`, `--grid`.
+- **Temas / cores** — design tokens no topo de `public/css/styles.css`: `:root` (*Datasheet*), `body.dark` (*Escuro*) e `body.eink` (*E-ink*) redefinem o mesmo conjunto de tokens. Tokens-chave: `--bg` (papel milimetrado), `--accent` (laranja industrial), `--ink`, `--muted`, `--line`, `--grid`. O switch de tema de 3 posições (`#themeSw`) e os botões de idioma (`.lang`) ficam na barra lateral; lógica em `public/js/script.js`.
 - **Textos / traduções** — objeto `I18N` em `public/js/script.js` (chaves `en` / `pt`).
 - **Desenho do What's Inside** — o `<svg class="xray">` inline em `public/index.html` (peças + callouts).
 - **Case 3D (Live 3D)** — `public/assets/case/assembled.glb` (convertido do `Assembled.step` via `occt-import-js`); os internos são construídos por código no `<script type="module">` inline.

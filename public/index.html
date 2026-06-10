@@ -21,29 +21,45 @@
 <header class="nav" id="nav">
   <a class="nav__brand" href="#top">
     <img src="assets/logo.png" alt="Sapiens Note" class="nav__logo">
-    <span>Sapiens<span class="accent">Note</span></span>
+    <span class="nav__brandtext">
+      <b>Sapiens<span class="accent">Note</span></b>
+      <em data-i18n="nav.tagline">e-ink · open hardware</em>
+    </span>
   </a>
+  <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navPanel">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav__panel" id="navPanel">
   <nav class="nav__links" id="navLinks">
-    <a href="#product" data-i18n="nav.product">Produto</a>
-    <a href="#features" data-i18n="nav.features">Recursos</a>
-    <a href="#how" data-i18n="nav.how">Como funciona</a>
-    <a href="#web" data-i18n="nav.web">Sapiens Web</a>
-    <a href="#compare" data-i18n="nav.compare">Comparação</a>
-    <a href="#inside" data-i18n="nav.inside">Hardware</a>
-    <a href="#model" data-i18n="nav.model">Live 3D</a>
-    <a href="#specs" data-i18n="nav.specs">Specs</a>
-    <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    <p class="nav__group"><span data-i18n="nav.grp.try">Experimente</span></p>
+    <a href="#sim"><svg class="ni" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.2"/><path d="M10.5 18h3"/></svg><span data-i18n="nav.sim">Simulador</span></a>
+    <a href="#webdemo"><svg class="ni" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="8" rx="1"/><rect x="13.5" y="3.5" width="7" height="5" rx="1"/><rect x="13.5" y="11.5" width="7" height="9" rx="1"/><rect x="3.5" y="14.5" width="7" height="6" rx="1"/></svg><span data-i18n="nav.webdemo">Dashboard</span></a>
+    <p class="nav__group"><span data-i18n="nav.grp.product">Produto</span></p>
+    <a href="#product"><svg class="ni" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span data-i18n="nav.product">Visão geral</span></a>
+    <a href="#features"><svg class="ni" viewBox="0 0 24 24"><path d="M12 3l2.1 5.6L20 11l-5.9 2.4L12 19l-2.1-5.6L4 11l5.9-2.4z"/></svg><span data-i18n="nav.features">Recursos</span></a>
+    <a href="#how"><svg class="ni" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M6 8.2v3.8a4 4 0 004 4h3.8"/></svg><span data-i18n="nav.how">Como funciona</span></a>
+    <a href="#web"><svg class="ni" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M8.5 20.5h7M12 16.5v4"/></svg><span data-i18n="nav.web">Sapiens Web</span></a>
+    <a href="#compare"><svg class="ni" viewBox="0 0 24 24"><path d="M4 20V11M10 20V4M16 20v-6M20 20H3.5"/></svg><span data-i18n="nav.compare">Comparação</span></a>
+    <a href="#inside"><svg class="ni" viewBox="0 0 24 24"><rect x="7.5" y="7.5" width="9" height="9" rx="1"/><path d="M10 3.5v2M14 3.5v2M10 18.5v2M14 18.5v2M3.5 10h2M3.5 14h2M18.5 10h2M18.5 14h2"/></svg><span data-i18n="nav.inside">Hardware</span></a>
+    <p class="nav__group"><span data-i18n="nav.grp.ref">Referência</span></p>
+    <a href="#model"><svg class="ni" viewBox="0 0 24 24"><path d="M12 2.5l8.5 4.7v9.6L12 21.5l-8.5-4.7V7.2z"/><path d="M12 12l8.5-4.8M12 12v9.5M12 12L3.5 7.2"/></svg><span data-i18n="nav.model">Live 3D</span></a>
+    <a href="#specs"><svg class="ni" viewBox="0 0 24 24"><path d="M6 2.5h8l4.5 4.5v15H6z"/><path d="M14 2.5V7h4.5M9 12h6M9 16h6M9 8.5h2.5"/></svg><span data-i18n="nav.specs">Specs</span></a>
+    <a href="#faq"><svg class="ni" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.2a2.5 2.5 0 014.6 1.3c0 1.6-2 2-2.2 3.5"/><path d="M12 17.2h.01"/></svg><span data-i18n="nav.faq">FAQ</span></a>
   </nav>
   <div class="nav__actions">
-    <button class="eink-toggle" id="einkToggle" data-i18n-title="eink.title" title="Alternar modo e-ink" aria-pressed="false">
-      <span class="eink-toggle__ic" aria-hidden="true">◐</span><span data-i18n="eink.label">E-ink</span>
-    </button>
-    <div class="lang" role="group" aria-label="Language">
-      <button class="lang__btn is-active" data-lang="pt">PT</button>
-      <button class="lang__btn" data-lang="en">EN</button>
+    <div class="lang lang--full" role="group" aria-label="Language">
+      <button class="lang__btn" data-lang="en">English</button>
+      <button class="lang__btn is-active" data-lang="pt">Português</button>
     </div>
-    <a class="btn btn--ghost" href="https://github.com/gustavoschaedler/sapiens-note" target="_blank" rel="noopener">GitHub ↗</a>
-    <button class="nav__burger" id="burger" aria-label="Menu">☰</button>
+    <div class="theme-sw" id="themeSw" role="group" data-i18n-title="eink.title" title="Alternar tema">
+      <button class="theme-sw__opt" data-theme="datasheet" data-i18n="theme.datasheet">Datasheet</button>
+      <button class="theme-sw__opt" data-theme="eink" data-i18n="theme.eink">E-ink</button>
+      <button class="theme-sw__opt" data-theme="dark" data-i18n="theme.dark">Escuro</button>
+    </div>
+    <a class="btn btn--ghost" href="mailto:gustavopoa@gmail.com">
+      <svg class="ni" viewBox="0 0 24 24" style="width:16px;height:16px;opacity:1"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <span data-i18n="nav.contact">E-mail</span></a>
+  </div>
   </div>
 </header>
 
@@ -68,16 +84,16 @@
     </div>
     <ul class="hero__stats">
       <li><b>200×200</b><span data-i18n="hero.stat1">e-ink mono</span></li>
-      <li><b>16&nbsp;kHz</b><span data-i18n="hero.stat2">captura local</span></li>
+      <li><b>48&nbsp;kHz</b><span data-i18n="hero.stat2">16-bit · captura local</span></li>
       <li><b>0</b><span data-i18n="hero.stat3">assinaturas</span></li>
       <li><b>100%</b><span data-i18n="hero.stat4">offline-first</span></li>
     </ul>
   </div>
 
   <div class="hero__device reveal">
-    <div class="techdraw" data-fig="FIG.01 · DEVICE · SCALE 1:1">
-      <span class="dim dim--w" data-v="45 mm" aria-hidden="true"></span>
-      <span class="dim dim--h" data-v="58 mm" aria-hidden="true"></span>
+    <div class="techdraw" data-fig="DEVICE · SCALE 1:1">
+      <span class="dim dim--w" data-v="4,5 cm · 45 mm" aria-hidden="true"></span>
+      <span class="dim dim--h" data-v="5,8 cm · 58 mm" aria-hidden="true"></span>
       <div class="device">
         <div class="device__screen">
           <img src="assets/sim-detail.png" alt="Sapiens Note transcript on e-ink">
@@ -85,6 +101,7 @@
         <div class="device__btns"><span></span><span></span></div>
       </div>
     </div>
+    <p class="hero__scale" aria-hidden="true"><b>4,5 × 5,8 cm</b> · <span data-i18n="hero.scale">menor que um cartão de crédito</span></p>
     <dl class="titleblock" aria-hidden="true">
       <div><dt>PROJECT</dt><dd>Sapiens Note</dd></div>
       <div><dt>BOARD</dt><dd>ESP32-S3</dd></div>
@@ -105,6 +122,39 @@
     <span>ESP32-S3</span><i>◇</i><span>YOUR DATA, LOCAL</span><i>◇</i>
   </div>
 </div>
+
+<!-- ============ DEVICE SIMULATOR (interactive) ============ -->
+<section class="section" id="sim">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="sim.eyebrow">Simulador</span>
+    <h2 data-i18n="sim.title">Experimente o aparelho</h2>
+    <p data-i18n="sim.sub">O firmware e-ink rodando no navegador. Toque nos botões e na tela para gravar, ler transcrições e ajustar opções.</p>
+    <p class="privnote"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span><b data-i18n="priv.lead">100% no seu navegador —</b> <span data-i18n="priv.sim">as gravações e transcrições ficam guardadas só aqui (IndexedDB). Nada é enviado para a nuvem nem para nenhum servidor.</span></span></p>
+  </div>
+  <div class="sim-wrap reveal">
+    <div class="sim-device" id="simDevice"></div>
+    <p class="sim-hint" data-i18n="sim.hint">Toque na tela e nos botões para navegar.</p>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD (interactive, real) ============ -->
+<section class="section" id="webdemo">
+  <div class="section__head reveal">
+    <span class="eyebrow" data-i18n="webdemo.eyebrow">Experimente</span>
+    <h2 data-i18n="webdemo.title">Dashboard interativo — experimente aqui</h2>
+    <p data-i18n="webdemo.sub">O Sapiens Web de verdade: lê as gravações reais feitas no simulador, toca o áudio, transcreve a gravação (Whisper / OpenAI) e baixa .wav/.txt.</p>
+    <p class="privnote"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span><b data-i18n="priv.lead">100% no seu navegador —</b> <span data-i18n="priv.dash">as gravações ficam só aqui, não vão para a nuvem. A transcrição é opcional: se você usá-la, o áudio vai direto para a OpenAI com a sua chave; nada passa por servidores nossos.</span></span></p>
+  </div>
+  <div class="webdemo reveal">
+    <div class="browser">
+      <div class="browser__bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="browser__url">127.0.0.1:8080</span>
+      </div>
+      <div class="browser__body" id="dashApp"></div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ PRODUCT ============ -->
 <section class="section" id="product">
@@ -144,7 +194,7 @@
     <article class="card reveal">
       <div class="card__ic">🎙️</div>
       <h3 data-i18n="feat.1t">Captura em um toque</h3>
-      <p data-i18n="feat.1d">Grava áudio 16 kHz mono, salvo localmente primeiro. A rede nunca é necessária para gravar.</p>
+      <p data-i18n="feat.1d">Grava áudio mono em 48 kHz / 16 bits, salvo primeiro no próprio aparelho. Não precisa de rede para gravar.</p>
     </article>
     <article class="card reveal">
       <div class="card__ic">🔋</div>
@@ -194,7 +244,7 @@
     <div class="step reveal">
       <span class="step__n">01</span>
       <h3 data-i18n="how.1t">Capture (offline)</h3>
-      <p data-i18n="how.1d">Aperte o botão e fale. O áudio vai para o cartão como WAV 16 kHz. Funciona sem nenhuma rede.</p>
+      <p data-i18n="how.1d">Aperte o botão e fale. O áudio é gravado no cartão como WAV 48 kHz / 16 bits mono. Funciona sem rede nenhuma.</p>
     </div>
     <div class="step__arrow" aria-hidden="true">→</div>
     <div class="step reveal">
@@ -227,33 +277,39 @@
           <span class="browser__url">127.0.0.1:8080</span>
         </div>
         <div class="browser__body">
-          <div class="dash">
-            <div class="dash__head">
+          <div class="dashprev" aria-hidden="true">
+            <svg width="0" height="0" style="position:absolute">
+              <defs>
+                <g id="di-dl"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></g>
+                <g id="di-re"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M17 8.5c1 1 1 3 0 4"/></g>
+                <g id="di-tr"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></g>
+              </defs>
+            </svg>
+            <div class="dashprev__head">
               <img src="assets/logo.png" alt="">
-              <div>
-                <b>Sapiens Note</b>
-                <small>local dashboard · engine: whisper · v0.1.0</small>
+              <div><b>Sapiens Note</b><small data-i18n="web.mocksub">painel local · motor: OpenAI Whisper</small></div>
+            </div>
+            <div class="dpr">
+              <div class="dpr__top"><span class="dpr__n">0001</span><span class="dpr__t">Jun 10, 12:16</span><span class="dpr__badge on" data-i18n="web.badge.done">Transcrito</span></div>
+              <div class="dpr__ctl">
+                <span class="dpr__play">▶</span><span class="dpr__time">0:00 / 0:11</span><span class="dpr__seek"><i style="width:0"></i></span>
+                <span class="dpr__btn act"><svg class="di" viewBox="0 0 24 24"><use href="#di-dl"/></svg>356 KB</span>
+                <span class="dpr__btn ico"><svg class="di" viewBox="0 0 24 24"><use href="#di-re"/></svg></span>
+                <span class="dpr__btn" data-i18n="web.tx">Transcrição</span>
+                <span class="dpr__btn ico"><svg class="di" viewBox="0 0 24 24"><use href="#di-tr"/></svg></span>
               </div>
             </div>
-            <div class="dash__row">
-              <span class="dash__n">0001</span>
-              <span class="dash__title">Jun 07, 11:48</span>
-              <span class="badge badge--ok" data-i18n="web.badge.done">Transcrito</span>
-              <span class="dash__btns">▶&nbsp; ⭳&nbsp; ↻</span>
+            <div class="dpr playing">
+              <div class="dpr__top"><span class="dpr__n">0002</span><span class="dpr__t">Jun 07, 11:48</span><span class="dpr__badge on" data-i18n="web.badge.done">Transcrito</span></div>
+              <div class="dpr__ctl">
+                <span class="dpr__play">❚❚</span><span class="dpr__time">0:04 / 1:01</span><span class="dpr__seek"><i style="width:8%"></i></span>
+                <span class="dpr__btn act"><svg class="di" viewBox="0 0 24 24"><use href="#di-dl"/></svg>1.9 MB</span>
+                <span class="dpr__btn ico"><svg class="di" viewBox="0 0 24 24"><use href="#di-re"/></svg></span>
+                <span class="dpr__btn" data-i18n="web.tx">Transcrição</span>
+                <span class="dpr__btn ico"><svg class="di" viewBox="0 0 24 24"><use href="#di-tr"/></svg></span>
+                <span class="dpr__spec"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              </div>
             </div>
-            <div class="dash__wave" aria-hidden="true">
-              <i style="height:30%"></i><i style="height:62%"></i><i style="height:88%"></i><i style="height:54%"></i>
-              <i style="height:74%"></i><i style="height:40%"></i><i style="height:96%"></i><i style="height:58%"></i>
-              <i style="height:34%"></i><i style="height:70%"></i><i style="height:48%"></i><i style="height:82%"></i>
-              <i style="height:60%"></i><i style="height:38%"></i><i style="height:66%"></i><i style="height:44%"></i>
-            </div>
-            <div class="dash__row">
-              <span class="dash__n">0002</span>
-              <span class="dash__title">Jun 07, 00:49</span>
-              <span class="badge" data-i18n="web.badge.pending">Pendente</span>
-              <span class="dash__btns">▶&nbsp; ⭳&nbsp; ↻</span>
-            </div>
-            <div class="dash__prog" aria-hidden="true"><i></i></div>
           </div>
         </div>
       </div>
@@ -366,6 +422,7 @@
       <rect class="chip-o" x="520" y="332" width="128" height="12" rx="2"/>  <!-- e-paper FPC -->
       <circle class="chip" cx="528" cy="380" r="7"/><circle class="chip-o" cx="528" cy="380" r="3"/>  <!-- microphone -->
       <circle class="chip" cx="636" cy="380" r="11"/><circle class="soft2" cx="636" cy="380" r="5"/>  <!-- speaker -->
+      <path class="acc" d="M650 373 q5 7 0 14 M656 369 q9 11 0 22"/>  <!-- speaker sound waves -->
       <rect class="chip" x="562" y="390" width="50" height="16" rx="4"/>    <!-- USB-C (bottom) -->
       <!-- 4 · microSD card + BOOT/PWR buttons on the RIGHT edge -->
       <rect class="chip-o" x="678" y="236" width="28" height="22" rx="2"/>  <!-- microSD (sticks out right) -->
@@ -392,7 +449,7 @@
         <text class="cal__s cal__m" x="310" y="101" data-i18n="inside.k1s">200×200 mono · toque</text>
 
         <line x1="545" y1="112" x2="586" y2="262"/><circle cx="586" cy="262" r="6"/>
-        <text class="cal__t cal__m" x="545" y="80" data-i18n="inside.k2t">ESP32-S3-PICO-1</text>
+        <text class="cal__t cal__m" x="545" y="80" data-i18n="inside.k2t">ESP32-S3</text>
         <text class="cal__s cal__m" x="545" y="101" data-i18n="inside.k2s">8 MB · Wi-Fi + BLE</text>
 
         <line x1="760" y1="112" x2="692" y2="247"/><circle cx="692" cy="247" r="6"/>
@@ -403,35 +460,35 @@
         <text class="cal__t cal__m" x="1041" y="80" data-i18n="inside.k4t">Carcaça traseira</text>
         <text class="cal__s cal__m" x="1041" y="101" data-i18n="inside.k4s">encaixe sem parafusos · 3D</text>
 
-        <!-- bottom — row A -->
-        <line x1="137" y1="400" x2="137" y2="486"/><circle cx="137" cy="400" r="6"/>
-        <text class="cal__t cal__m" x="137" y="508" data-i18n="inside.k5t">Carcaça frontal</text>
-        <text class="cal__s cal__m" x="137" y="529" data-i18n="inside.k5s">45 × 58 mm · impressa 3D</text>
+        <!-- bottom — row A (y 500/521) -->
+        <line x1="137" y1="400" x2="120" y2="478"/><circle cx="137" cy="400" r="6"/>
+        <text class="cal__t cal__m" x="120" y="500" data-i18n="inside.k5t">Carcaça frontal</text>
+        <text class="cal__s cal__m" x="120" y="521" data-i18n="inside.k5s">45 × 58 mm · impressa 3D</text>
 
-        <line x1="528" y1="380" x2="470" y2="486"/><circle cx="528" cy="380" r="6"/>
-        <text class="cal__t cal__m" x="470" y="508" data-i18n="inside.k7t">Microfone</text>
-        <text class="cal__s cal__m" x="470" y="529" data-i18n="inside.k7s">captação de voz</text>
+        <line x1="587" y1="406" x2="520" y2="478"/><circle cx="587" cy="406" r="6"/>
+        <text class="cal__t cal__m" x="520" y="500" data-i18n="inside.k10t">USB-C</text>
+        <text class="cal__s cal__m" x="520" y="521" data-i18n="inside.k10s">energia + dados</text>
 
-        <line x1="685" y1="300" x2="860" y2="486"/><circle cx="685" cy="300" r="6"/>
-        <text class="cal__t cal__m" x="860" y="508" data-i18n="inside.k6t">Botões BOOT + PWR</text>
-        <text class="cal__s cal__m" x="860" y="529" data-i18n="inside.k6s">lateral direita</text>
+        <line x1="685" y1="300" x2="820" y2="478"/><circle cx="685" cy="300" r="6"/>
+        <text class="cal__t cal__m" x="820" y="500" data-i18n="inside.k6t">Botões BOOT + PWR</text>
+        <text class="cal__s cal__m" x="820" y="521" data-i18n="inside.k6s">lateral direita</text>
 
-        <!-- bottom — row B (lower) -->
-        <line x1="587" y1="406" x2="320" y2="556"/><circle cx="587" cy="406" r="6"/>
-        <text class="cal__t cal__m" x="320" y="578" data-i18n="inside.k10t">USB-C</text>
-        <text class="cal__s cal__m" x="320" y="599" data-i18n="inside.k10s">energia + dados</text>
+        <!-- bottom — row B (y 575/596) -->
+        <line x1="528" y1="380" x2="360" y2="553"/><circle cx="528" cy="380" r="6"/>
+        <text class="cal__t cal__m" x="360" y="575" data-i18n="inside.k7t">Microfone</text>
+        <text class="cal__s cal__m" x="360" y="596" data-i18n="inside.k7s">captação de voz</text>
 
-        <line x1="636" y1="380" x2="640" y2="556"/><circle cx="636" cy="380" r="6"/>
-        <text class="cal__t cal__m" x="640" y="578" data-i18n="inside.k3t">Alto-falante</text>
-        <text class="cal__s cal__m" x="640" y="599" data-i18n="inside.k3s">saída de áudio</text>
+        <line x1="636" y1="380" x2="660" y2="553"/><circle cx="636" cy="380" r="6"/>
+        <text class="cal__t cal__m" x="660" y="575" data-i18n="inside.k3t">Alto-falante</text>
+        <text class="cal__s cal__m" x="660" y="596" data-i18n="inside.k3s">saída de áudio</text>
 
-        <line x1="815" y1="370" x2="1010" y2="556"/><circle cx="815" cy="370" r="6"/>
-        <text class="cal__t cal__m" x="1010" y="578" data-i18n="inside.k8t">Bateria Li-ion</text>
-        <text class="cal__s cal__m" x="1010" y="599" data-i18n="inside.k8s">conector MX1.25</text>
+        <line x1="815" y1="370" x2="1010" y2="553"/><circle cx="815" cy="370" r="6"/>
+        <text class="cal__t cal__m" x="1010" y="575" data-i18n="inside.k8t">Bateria Li-ion</text>
+        <text class="cal__s cal__m" x="1010" y="596" data-i18n="inside.k8s">conector MX1.25</text>
       </g>
     </svg>
   </div>
-  <p class="footnote" data-i18n="inside.note">Render da sua case impressa em 3D, montada com o hardware dentro. Veja girando na seção Live 3D.</p>
+  <p class="footnote"><span data-i18n="inside.note">A carcaça impressa em 3D encaixa sem parafusos. Layout real da placa:</span> <a class="footnote__lnk" href="https://www.waveshare.com/esp32-s3-epaper-1.54.htm?sku=34211" target="_blank" rel="noopener">Waveshare ESP32-S3-ePaper-1.54 (variante touch) ↗</a></p>
 </section>
 
 <!-- ============ LIVE 3D MODEL ============ -->
@@ -462,7 +519,7 @@
   <div class="specs">
     <div class="spec reveal"><b data-i18n="spec.mcu">MCU</b><span>ESP32-S3 · dual-core LX7 @ 240 MHz</span></div>
     <div class="spec reveal"><b data-i18n="spec.display">Tela</b><span>1,54" e-paper · 200×200 · mono</span></div>
-    <div class="spec reveal"><b data-i18n="spec.audio">Áudio</b><span>ES8311 · mic + alto-falante · 16 kHz mono</span></div>
+    <div class="spec reveal"><b data-i18n="spec.audio">Áudio</b><span>ES8311 · mic + alto-falante · 48 kHz / 16 bits · mono</span></div>
     <div class="spec reveal"><b data-i18n="spec.touch">Toque</b><span>FT6336 capacitivo (I²C)</span></div>
     <div class="spec reveal"><b data-i18n="spec.storage">Armazenamento</b><span>microSD (FAT32) · SQLite local</span></div>
     <div class="spec reveal"><b data-i18n="spec.power">Energia</b><span>bateria Li · deep-sleep · dias de uso</span></div>
@@ -512,11 +569,14 @@
 <!-- ============ CTA ============ -->
 <section class="cta">
   <div class="cta__inner reveal">
-    <h2 data-i18n="cta.title">Aberto. Local. Seu.</h2>
-    <p data-i18n="cta.sub">Explore o código, rode os simuladores no desktop e construa o seu Sapiens Note.</p>
-    <div class="hero__cta">
-      <a class="btn btn--primary" href="https://github.com/gustavoschaedler/sapiens-note" target="_blank" rel="noopener" data-i18n="cta.btn1">Ver no GitHub ↗</a>
-      <a class="btn btn--ghost" href="#top" data-i18n="cta.btn2">Voltar ao topo</a>
+    <img src="assets/logo.png" alt="Sapiens Note" class="cta__logo">
+    <div class="cta__body">
+      <h2 data-i18n="cta.title">Aberto. Local. Seu.</h2>
+      <p data-i18n="cta.sub">Explore o código, rode os simuladores no desktop e construa o seu Sapiens Note.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="mailto:gustavopoa@gmail.com" data-i18n="cta.btn1">Fale comigo ↗</a>
+        <a class="btn btn--ghost" href="#top" data-i18n="cta.btn2">Voltar ao topo</a>
+      </div>
     </div>
   </div>
 </section>
@@ -696,5 +756,8 @@ if (mount && location.protocol !== 'file:') {
 </script>
 
 <script src="js/script.js"></script>
+<script src="js/store.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/simulator.js"></script>
 </body>
 </html>

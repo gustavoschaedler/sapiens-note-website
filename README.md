@@ -40,11 +40,17 @@
 A **static** product landing page — no build step, no framework. The default
 **"Datasheet"** theme borrows the language of *hardware engineering*: a drafting
 grid, dimension lines and a title block around the device, `REF.0x` part designators,
-mono technical labels and one industrial-orange accent. A one-click **e-ink mode**
-then flips the whole site into the device's flat black-and-white aesthetic.
+mono technical labels and one industrial-orange accent. **Three one-click themes** —
+**Datasheet** (default), **E-ink** (the device's flat black-and-white look) and
+**Dark** — are picked from a 3-position switch in the **left sidebar**.
 **Bilingual** (English / Portuguese) with live switching, **mobile-first responsive**,
 and **fully offline**: Three.js and the web fonts are vendored locally, so there are
 **no CDN dependencies**.
+
+The page also ships two **real, working** browser demos — a device simulator and the
+Sapiens Web dashboard — that share a local **IndexedDB** store. Everything they do
+stays in your browser; nothing is sent to a server (the only exception is the optional
+OpenAI transcription, which uses your own key).
 
 Content and specs are based on the **Sapiens Note** project and the real
 **Waveshare ESP32-S3-ePaper-1.54** board (touch variant).
@@ -53,18 +59,20 @@ Content and specs are based on the **Sapiens Note** project and the real
 
 | | Feature |
 |---|---|
-| 🌐 | **Bilingual EN / PT-BR** — top toggle, auto-detects the browser language, remembers the choice. |
-| 🎨 | **"Datasheet" theme** — engineering look: drafting grid, dimension lines, title block, `REF.0x` designators, mono labels and an industrial-orange accent. |
-| 📱 | **Mobile-first responsive** — tuned down to 375 px (stacked hero, 2×2 stat block, full-width buttons, collapsing nav). |
-| 🌗 | **E-ink mode** — swaps the datasheet theme for the device's flat paper look (hard-shadow, monochrome). Persistent + shareable (`?eink=1`). |
-| 🧠 | **Live 3D model** — the **real case** (Three.js + `GLTFLoader`, GLB converted from the Shapr3D `Assembled.step`) plus faithful internals (PCB, PICO module, header, USB-C, battery, e-ink screen), with **Assembled ⇄ Exploded** toggle and auto-rotation. |
-| 🔩 | **"What's Inside"** — a hand-drawn **SVG technical drawing** based on the real board layout, with engineering callouts to the actual parts (ESP32-S3-PICO-1, FT6336, ES8311, USB-C, BOOT/PWR buttons on the side, Li-ion battery…). |
+| 🧭 | **Left sidebar nav** — grouped (*Try it · Product · Reference*) with hand-drawn icons, a scroll-spy active state, and a clean collapse to a top bar + drawer on mobile. |
+| 🎨 | **Three themes, one switch** — **Datasheet** (default engineering look: drafting grid, dimension lines, `REF.0x` designators, industrial-orange accent), **E-ink** (the device's flat B/W paper) and **Dark**, chosen from a 3-position control. Persistent (`localStorage`); e-ink is also shareable via `?eink=1`. |
+| 🌐 | **Bilingual EN / PT-BR** — `English` / `Português` buttons in the sidebar; auto-detects the browser language and remembers the choice. |
+| 🕹️ | **Device simulator (real)** — the e-ink firmware in the browser with hand-drawn (SVG) icons: **REC records 48 kHz / 16-bit mono audio from your mic** (`MediaRecorder`); the note stays *pending* (the device only captures — like the firmware) and plays back for real. Full screen set (Home · List · Recording · Transcript · Player · Settings · Sync · Tags · Delete). (`public/js/simulator.js`) |
+| 🖥️ | **Real dashboard (`sapiens-web`)** — a faithful port that reads the **same store** the device writes: plays the real audio with a live **spectrum**, **transcribes via OpenAI Whisper** (your key, kept only in the browser), downloads real **`.wav`/`.txt`**, deletes, paginates. (`public/js/dashboard.js`) |
+| 🔁 | **The real flow** — record on the device → transcribe in the dashboard → the transcript shows back on the device, via a shared **IndexedDB** store (`public/js/store.js`). |
+| 🔒 | **Local-first / private** — recordings, notes and transcripts live **only in your browser** (IndexedDB); nothing is sent to any server. The only exception: if you use transcription, the audio goes straight to OpenAI with your own key. |
+| 🧠 | **Live 3D model** — the **real case** (Three.js + `GLTFLoader`, GLB converted from the Shapr3D `Assembled.step`) plus faithful internals (PCB, ESP32-S3 module, header, USB-C, battery, e-ink screen), with **Assembled ⇄ Exploded** toggle and auto-rotation. |
+| 🔩 | **"What's Inside"** — a hand-drawn **SVG technical drawing** of the real board, with engineering callouts (ESP32-S3, FT6336, ES8311, USB-C, BOOT/PWR buttons, Li-ion battery…) and a link to the **Waveshare ESP32-S3-ePaper-1.54** product page. |
 | 📊 | **Comparison** with market players (Plaud Note, Limitless, Otter.ai, Rabbit R1). |
-| 🔌 | **100% offline** — local Three.js + local fonts, zero CDN. |
-| 📱 | **Responsive** and `prefers-reduced-motion` aware. |
+| 📱 | **Mobile-first responsive** (down to 375 px) and `prefers-reduced-motion` aware; **100% offline** — local Three.js + fonts, zero CDN. |
 
-**Sections:** `Hero` · `Product` · `Features` · `How it works` · `Sapiens Web`
-· `Compare` · `What's Inside` · `Live 3D` · `Specs` · `FAQ` · `CTA`
+**Sections:** `Hero` · `Simulator` · `Dashboard` · `Product` · `Features` · `How it works`
+· `Sapiens Web` · `Compare` · `What's Inside` · `Live 3D` · `Specs` · `FAQ` · `CTA`
 
 ## 🛠️ Stack
 
@@ -73,6 +81,17 @@ Content and specs are based on the **Sapiens Note** project and the real
 - **Google Fonts vendored** in `public/assets/fonts/` — no CDN.
 - Home-grown i18n with `data-i18n` + a dictionary in `public/js/script.js`.
 
+## 🔒 Where your data lives
+
+Everything the two demos do stays **in your browser** — there is no backend:
+
+- **Recordings + notes + transcripts** → IndexedDB (`sapiens-sim` database, object
+  stores `notes` + `audio`), in `public/js/store.js`.
+- **OpenAI API key** → `localStorage` (`sn-openai-key`), browser-only.
+- **Only thing that ever leaves the browser:** transcription sends the audio straight
+  to `api.openai.com` with your key. Recording, playback, reading and `.wav`/`.txt`
+  downloads are fully offline. Clearing the site's data wipes everything.
+
 ## 📁 Structure
 
 ```
@@ -80,7 +99,7 @@ Content and specs are based on the **Sapiens Note** project and the real
 ├── public/                  ← document root (served by nginx)
 │   ├── index.html
 │   ├── css/styles.css
-│   ├── js/script.js
+│   ├── js/script.js · js/store.js · js/simulator.js · js/dashboard.js
 │   └── assets/
 │       ├── logo.png · sim-*.png
 │       ├── case/assembled.glb   real case (from Assembled.step) + sources (*.3mf)
@@ -125,7 +144,7 @@ Full guide — updates, **Cloudflare Tunnel**, firewall, hardening:
 
 ## 🎨 Customization
 
-- **Theme / colors** — design tokens at the top of `public/css/styles.css` (`:root` for *Datasheet*, `body.eink` for e-ink). Key tokens: `--bg` (drafting paper), `--accent` (industrial orange), `--ink`, `--muted`, `--line`, `--grid`.
+- **Themes / colors** — design tokens at the top of `public/css/styles.css`: `:root` (*Datasheet*), `body.dark` (*Dark*) and `body.eink` (*E-ink*) each redefine the same token set. Key tokens: `--bg` (drafting paper), `--accent` (industrial orange), `--ink`, `--muted`, `--line`, `--grid`. The 3-position theme switch (`#themeSw`) and language buttons (`.lang`) live in the sidebar; logic in `public/js/script.js`.
 - **Text / translations** — the `I18N` object in `public/js/script.js` (`en` / `pt` keys).
 - **What's Inside drawing** — the inline `<svg class="xray">` in `public/index.html` (parts + callouts).
 - **Live 3D case** — `public/assets/case/assembled.glb` (converted from `Assembled.step` via `occt-import-js`); the internals are built procedurally in the inline `<script type="module">`.
