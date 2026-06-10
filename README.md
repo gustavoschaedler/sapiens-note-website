@@ -28,7 +28,7 @@
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Graphite &amp; Signal</b> (default)</sub></td>
+    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Datasheet</b> (default)</sub></td>
     <td align="center"><img src="docs/preview-eink.png" width="380"><br><sub><b>E-ink mode</b> (one click)</sub></td>
   </tr>
 </table>
@@ -38,11 +38,11 @@
 ## ✨ Overview
 
 A **static** product landing page — no build step, no framework. The default
-**"Graphite & Signal"** theme is a warm graphite *device console* grounded in the
-product's own world: e-ink "paper" panels, a fine e-ink pixel-dither texture and a
-single signal-red accent (the *record* signal — REC dot, live waveform, the record
-button). A one-click **e-ink mode** then flips the whole site into the device's flat
-black-and-white aesthetic. **Bilingual** (English / Portuguese) with live switching,
+**"Datasheet"** theme borrows the language of *hardware engineering*: a drafting
+grid, dimension lines and a title block around the device, `REF.0x` part designators,
+mono technical labels and one industrial-orange accent. A one-click **e-ink mode**
+then flips the whole site into the device's flat black-and-white aesthetic.
+**Bilingual** (English / Portuguese) with live switching, **mobile-first responsive**,
 and **fully offline**: Three.js and the web fonts are vendored locally, so there are
 **no CDN dependencies**.
 
@@ -54,10 +54,11 @@ Content and specs are based on the **Sapiens Note** project and the real
 | | Feature |
 |---|---|
 | 🌐 | **Bilingual EN / PT-BR** — top toggle, auto-detects the browser language, remembers the choice. |
-| 🎨 | **"Graphite & Signal" theme** — warm graphite console, e-ink paper panels, pixel-dither texture, one signal-red accent. Mono "device voice" type. |
-| 🌗 | **E-ink mode** — swaps the graphite console for the device's flat paper look (hard-shadow, monochrome). Persistent + shareable (`?eink=1`). |
-| 🧠 | **Live 3D model** — interactive case (Three.js + `ThreeMFLoader`) from the real `.3mf` files, with **Assembled ⇄ Exploded** toggle, auto-rotation and the screen cycling app shots. |
-| 🔩 | **"What's Inside"** — *flipper.net*-style exploded view with a detailed board and callouts to the real parts (ESP32-S3-PICO-1, ES8311, FT6336, SHTC3, PCF85063, microSD/USB-C, Li battery…). |
+| 🎨 | **"Datasheet" theme** — engineering look: drafting grid, dimension lines, title block, `REF.0x` designators, mono labels and an industrial-orange accent. |
+| 📱 | **Mobile-first responsive** — tuned down to 375 px (stacked hero, 2×2 stat block, full-width buttons, collapsing nav). |
+| 🌗 | **E-ink mode** — swaps the datasheet theme for the device's flat paper look (hard-shadow, monochrome). Persistent + shareable (`?eink=1`). |
+| 🧠 | **Live 3D model** — the **real case** (Three.js + `GLTFLoader`, GLB converted from the Shapr3D `Assembled.step`) plus faithful internals (PCB, PICO module, header, USB-C, battery, e-ink screen), with **Assembled ⇄ Exploded** toggle and auto-rotation. |
+| 🔩 | **"What's Inside"** — a hand-drawn **SVG technical drawing** based on the real board layout, with engineering callouts to the actual parts (ESP32-S3-PICO-1, FT6336, ES8311, USB-C, BOOT/PWR buttons on the side, Li-ion battery…). |
 | 📊 | **Comparison** with market players (Plaud Note, Limitless, Otter.ai, Rabbit R1). |
 | 🔌 | **100% offline** — local Three.js + local fonts, zero CDN. |
 | 📱 | **Responsive** and `prefers-reduced-motion` aware. |
@@ -81,9 +82,9 @@ Content and specs are based on the **Sapiens Note** project and the real
 │   ├── css/styles.css
 │   ├── js/script.js
 │   └── assets/
-│       ├── logo.png · sim-*.png · exploded.png
-│       ├── case/*.3mf           3D case model (Live 3D)
-│       ├── vendor/three/        local Three.js (core, OrbitControls, 3MFLoader, fflate)
+│       ├── logo.png · sim-*.png
+│       ├── case/assembled.glb   real case (from Assembled.step) + sources (*.3mf)
+│       ├── vendor/three/        local Three.js (core, OrbitControls, GLTFLoader, …)
 │       └── fonts/               local web fonts (woff2 + fonts.css)
 ├── deploy/                  ← infrastructure
 │   ├── Dockerfile               hardened nginx (unprivileged, alpine)
@@ -124,9 +125,10 @@ Full guide — updates, **Cloudflare Tunnel**, firewall, hardening:
 
 ## 🎨 Customization
 
-- **Theme / colors** — design tokens at the top of `public/css/styles.css` (`:root` for *Graphite & Signal*, `body.eink` for e-ink). Key tokens: `--bg` (graphite), `--paper` (e-ink panel), `--accent` (signal red), `--ink`, `--muted`.
+- **Theme / colors** — design tokens at the top of `public/css/styles.css` (`:root` for *Datasheet*, `body.eink` for e-ink). Key tokens: `--bg` (drafting paper), `--accent` (industrial orange), `--ink`, `--muted`, `--line`, `--grid`.
 - **Text / translations** — the `I18N` object in `public/js/script.js` (`en` / `pt` keys).
-- **What's Inside image / 3D case** — `public/assets/exploded.png` and `public/assets/case/*.3mf`.
+- **What's Inside drawing** — the inline `<svg class="xray">` in `public/index.html` (parts + callouts).
+- **Live 3D case** — `public/assets/case/assembled.glb` (converted from `Assembled.step` via `occt-import-js`); the internals are built procedurally in the inline `<script type="module">`.
 
 ## 📄 License
 

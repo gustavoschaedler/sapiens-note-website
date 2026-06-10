@@ -75,21 +75,22 @@
   </div>
 
   <div class="hero__device reveal">
-    <div class="device">
-      <div class="device__screen">
-        <img src="assets/sim-detail.png" alt="Sapiens Note transcript on e-ink">
+    <div class="techdraw" data-fig="FIG.01 · DEVICE · SCALE 1:1">
+      <span class="dim dim--w" data-v="45 mm" aria-hidden="true"></span>
+      <span class="dim dim--h" data-v="58 mm" aria-hidden="true"></span>
+      <div class="device">
+        <div class="device__screen">
+          <img src="assets/sim-detail.png" alt="Sapiens Note transcript on e-ink">
+        </div>
+        <div class="device__btns"><span></span><span></span></div>
       </div>
-      <div class="device__btns"><span></span><span></span></div>
     </div>
-    <div class="wave" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <p class="hero__caption">
-      <span class="rec"><span class="rec__dot"></span>REC</span>
-      <span data-i18n="hero.caption">voz → texto, no próprio aparelho</span>
-    </p>
+    <dl class="titleblock" aria-hidden="true">
+      <div><dt>PROJECT</dt><dd>Sapiens Note</dd></div>
+      <div><dt>BOARD</dt><dd>ESP32-S3</dd></div>
+      <div><dt>DISPLAY</dt><dd>1.54″ e-ink</dd></div>
+      <div><dt>LICENSE</dt><dd>Open-HW</dd></div>
+    </dl>
   </div>
 </section>
 
@@ -337,40 +338,96 @@
     <p data-i18n="inside.sub">O coração do produto é a placa ESP32-S3-ePaper-1.54 — sem a case original do Pala Note. Tudo o que importa, em ~40 mm.</p>
   </div>
   <div class="inside reveal">
-    <svg viewBox="0 0 1200 1180" class="xray" role="img" aria-label="ESP32-S3-ePaper-1.54 exploded view">
-      <image href="assets/exploded.png" x="0" y="0" width="1200" height="1180"/>
+    <svg viewBox="0 0 1180 620" class="xray" role="img"
+         aria-label="ESP32-S3-ePaper-1.54 — exploded technical drawing (true 45 × 58 mm proportions)">
+      <!-- assembly axis -->
+      <line class="axis" x1="36" y1="285" x2="1144" y2="285"/>
+
+      <!-- PARTS (front -> back) · portrait 45 × 58 mm .................. -->
+      <!-- 1 · front housing: square screen up top, chin below, buttons LEFT edge -->
+      <rect class="part" x="48" y="170" width="178" height="230" rx="30"/>
+      <rect class="soft2" x="77" y="196" width="120" height="120" rx="8"/>
+      <rect class="soft2" x="226" y="236" width="8" height="22" rx="2"/>
+      <rect class="soft2" x="226" y="300" width="8" height="22" rx="2"/>
+
+      <!-- 2 · e-paper display (square) + FPC tail -->
+      <rect class="part" x="288" y="210" width="150" height="150" rx="6"/>
+      <rect class="soft2" x="300" y="222" width="126" height="126" rx="3"/>
+      <path class="hatch" d="M306 318 L 372 252 M312 344 L 404 256 M340 346 L 422 268"/>
+      <rect class="chip-o" x="346" y="360" width="34" height="20"/>
+
+      <!-- 3 · main PCB (back side layout) -->
+      <rect class="part" x="500" y="170" width="178" height="230" rx="8"/>
+      <polyline class="acc" points="544,182 556,176 568,182 580,176 592,182 604,176 616,182"/> <!-- antenna -->
+      <rect class="chip" x="556" y="196" width="30" height="24" rx="3"/>    <!-- ES8311 codec -->
+      <rect class="chip" x="510" y="196" width="34" height="24" rx="3"/>    <!-- RTC -->
+      <rect class="chip" x="520" y="262" width="128" height="62" rx="4"/>   <!-- ESP32-S3-PICO-1 -->
+      <rect class="chip-o" x="527" y="269" width="9" height="9"/>
+      <rect class="chip-o" x="520" y="332" width="128" height="12" rx="2"/>  <!-- e-paper FPC -->
+      <circle class="chip" cx="528" cy="380" r="7"/><circle class="chip-o" cx="528" cy="380" r="3"/>  <!-- microphone -->
+      <circle class="chip" cx="636" cy="380" r="11"/><circle class="soft2" cx="636" cy="380" r="5"/>  <!-- speaker -->
+      <rect class="chip" x="562" y="390" width="50" height="16" rx="4"/>    <!-- USB-C (bottom) -->
+      <!-- 4 · microSD card + BOOT/PWR buttons on the RIGHT edge -->
+      <rect class="chip-o" x="678" y="236" width="28" height="22" rx="2"/>  <!-- microSD (sticks out right) -->
+      <rect class="part" x="678" y="288" width="14" height="22" rx="4"/>     <!-- BOOT -->
+      <rect class="part" x="678" y="320" width="14" height="22" rx="4"/>     <!-- PWR -->
+      <line class="hatch" x1="692" y1="299" x2="678" y2="299"/><line class="hatch" x1="692" y1="331" x2="678" y2="331"/>
+
+      <!-- 5 · Li-ion battery -->
+      <rect class="part" x="745" y="200" width="140" height="170" rx="14"/>
+      <rect class="chip-o" x="757" y="214" width="116" height="40" rx="4"/>
+      <path class="hatch" d="M745 246 C 706 246 694 216 668 216"/>
+
+      <!-- 6 · back housing — snap-fit, NO screws, 3D-printed -->
+      <rect class="soft" x="952" y="170" width="178" height="230" rx="30"/>
+      <rect class="soft2" x="968" y="186" width="146" height="198" rx="22"/>
+      <rect class="soft2" x="1016" y="394" width="22" height="8" rx="2"/>
+      <rect class="soft2" x="1046" y="394" width="14" height="8" rx="2"/>
+
+      <!-- CALLOUTS — two staggered rows top & bottom, widely separated -->
       <g class="cal">
-        <!-- left: display + front housing -->
-        <line x1="252" y1="442" x2="276" y2="510"/><circle cx="276" cy="510" r="6"/>
-        <text class="cal__t cal__r" x="238" y="432" data-i18n="inside.k1t">Tela e-Paper 1,54" + FT6336</text>
-        <text class="cal__s cal__r" x="238" y="458" data-i18n="inside.k1s">200×200 mono · toque (I²C)</text>
+        <!-- top -->
+        <line x1="310" y1="112" x2="363" y2="210"/><circle cx="363" cy="210" r="6"/>
+        <text class="cal__t cal__m" x="310" y="80" data-i18n="inside.k1t">Tela e-Paper 1,54"</text>
+        <text class="cal__s cal__m" x="310" y="101" data-i18n="inside.k1s">200×200 mono · toque</text>
 
-        <line x1="252" y1="650" x2="278" y2="590"/><circle cx="278" cy="590" r="6"/>
-        <text class="cal__t cal__r" x="238" y="644" data-i18n="inside.k2t">Carcaça frontal</text>
-        <text class="cal__s cal__r" x="238" y="670" data-i18n="inside.k2s">case impressa em 3D</text>
+        <line x1="545" y1="112" x2="586" y2="262"/><circle cx="586" cy="262" r="6"/>
+        <text class="cal__t cal__m" x="545" y="80" data-i18n="inside.k2t">ESP32-S3-PICO-1</text>
+        <text class="cal__s cal__m" x="545" y="101" data-i18n="inside.k2s">8 MB · Wi-Fi + BLE</text>
 
-        <!-- top: main board + buttons -->
-        <line x1="450" y1="392" x2="480" y2="522"/><circle cx="480" cy="522" r="6"/>
-        <text class="cal__t cal__m" x="430" y="354" data-i18n="inside.k3t">Placa ESP32-S3-PICO-1</text>
-        <text class="cal__s cal__m" x="430" y="380" data-i18n="inside.k3s">8 MB · ES8311 · SHTC3 · RTC</text>
+        <line x1="760" y1="112" x2="692" y2="247"/><circle cx="692" cy="247" r="6"/>
+        <text class="cal__t cal__m" x="760" y="80" data-i18n="inside.k9t">Cartão microSD</text>
+        <text class="cal__s cal__m" x="760" y="101" data-i18n="inside.k9s">lateral direita</text>
 
-        <line x1="772" y1="346" x2="544" y2="496"/><circle cx="544" cy="496" r="6"/>
-        <text class="cal__t cal__m" x="800" y="312" data-i18n="inside.k4t">Botões BOOT + PWR</text>
-        <text class="cal__s cal__m" x="800" y="338" data-i18n="inside.k4s">ligar · boot</text>
+        <line x1="1041" y1="112" x2="1041" y2="170"/><circle cx="1041" cy="170" r="6"/>
+        <text class="cal__t cal__m" x="1041" y="80" data-i18n="inside.k4t">Carcaça traseira</text>
+        <text class="cal__s cal__m" x="1041" y="101" data-i18n="inside.k4s">encaixe sem parafusos · 3D</text>
 
-        <!-- bottom: I/O -->
-        <line x1="476" y1="800" x2="528" y2="640"/><circle cx="528" cy="640" r="6"/>
-        <text class="cal__t cal__m" x="476" y="828" data-i18n="inside.k5t">microSD + USB-C</text>
-        <text class="cal__s cal__m" x="476" y="854" data-i18n="inside.k5s">armazenamento · carga</text>
+        <!-- bottom — row A -->
+        <line x1="137" y1="400" x2="137" y2="486"/><circle cx="137" cy="400" r="6"/>
+        <text class="cal__t cal__m" x="137" y="508" data-i18n="inside.k5t">Carcaça frontal</text>
+        <text class="cal__s cal__m" x="137" y="529" data-i18n="inside.k5s">45 × 58 mm · impressa 3D</text>
 
-        <!-- right: battery + back housing -->
-        <line x1="966" y1="596" x2="706" y2="632"/><circle cx="706" cy="632" r="6"/>
-        <text class="cal__t" x="980" y="586" data-i18n="inside.k6t">Bateria Li</text>
-        <text class="cal__s" x="980" y="612" data-i18n="inside.k6s">conector MX1.25</text>
+        <line x1="528" y1="380" x2="470" y2="486"/><circle cx="528" cy="380" r="6"/>
+        <text class="cal__t cal__m" x="470" y="508" data-i18n="inside.k7t">Microfone</text>
+        <text class="cal__s cal__m" x="470" y="529" data-i18n="inside.k7s">captação de voz</text>
 
-        <line x1="966" y1="712" x2="840" y2="648"/><circle cx="840" cy="648" r="6"/>
-        <text class="cal__t" x="980" y="702" data-i18n="inside.k7t">Carcaça traseira</text>
-        <text class="cal__s" x="980" y="728" data-i18n="inside.k7s">encaixe (snap-fit)</text>
+        <line x1="685" y1="300" x2="860" y2="486"/><circle cx="685" cy="300" r="6"/>
+        <text class="cal__t cal__m" x="860" y="508" data-i18n="inside.k6t">Botões BOOT + PWR</text>
+        <text class="cal__s cal__m" x="860" y="529" data-i18n="inside.k6s">lateral direita</text>
+
+        <!-- bottom — row B (lower) -->
+        <line x1="587" y1="406" x2="320" y2="556"/><circle cx="587" cy="406" r="6"/>
+        <text class="cal__t cal__m" x="320" y="578" data-i18n="inside.k10t">USB-C</text>
+        <text class="cal__s cal__m" x="320" y="599" data-i18n="inside.k10s">energia + dados</text>
+
+        <line x1="636" y1="380" x2="640" y2="556"/><circle cx="636" cy="380" r="6"/>
+        <text class="cal__t cal__m" x="640" y="578" data-i18n="inside.k3t">Alto-falante</text>
+        <text class="cal__s cal__m" x="640" y="599" data-i18n="inside.k3s">saída de áudio</text>
+
+        <line x1="815" y1="370" x2="1010" y2="556"/><circle cx="815" cy="370" r="6"/>
+        <text class="cal__t cal__m" x="1010" y="578" data-i18n="inside.k8t">Bateria Li-ion</text>
+        <text class="cal__s cal__m" x="1010" y="599" data-i18n="inside.k8s">conector MX1.25</text>
       </g>
     </svg>
   </div>
@@ -476,7 +533,7 @@
   <small>© <span id="year"></span> Sapiens Note · <span data-i18n="footer.made">feito com foco em privacidade</span></small>
 </footer>
 
-<!-- Live 3D model (Three.js) — the USER-PROVIDED case (.3mf), exploded view -->
+<!-- Live 3D model (Three.js) — REAL case from Assembled.step (→ GLB) + faithful internals -->
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -486,112 +543,142 @@
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { ThreeMFLoader } from 'three/addons/loaders/3MFLoader.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const mount = document.getElementById('viewer');
-// The 3D needs HTTP: file:// blocks ES modules + fetching the local .3mf files.
+// The 3D needs HTTP: file:// blocks ES modules + fetching the local .glb.
 if (mount && location.protocol === 'file:') mount.classList.add('failed');
 if (mount && location.protocol !== 'file:') {
   const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 5000);
+  const cam = new THREE.PerspectiveCamera(38, 1, 0.1, 8000);
   const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
   mount.appendChild(renderer.domElement);
 
-  // bright multi-light rig (no IBL, so it renders everywhere) so the matte case pops
-  scene.add(new THREE.HemisphereLight(0xeaf1ff, 0x2a2f3a, 2.0));
-  const key   = new THREE.DirectionalLight(0xffffff, 3.2); key.position.set(60, 90, 70);   scene.add(key);
-  const rim   = new THREE.DirectionalLight(0x9b7cff, 2.4); rim.position.set(-80, -10, -60);  scene.add(rim);
-  const fill  = new THREE.DirectionalLight(0x22d3ee, 1.4); fill.position.set(-50, 50, 60);   scene.add(fill);
-  const front = new THREE.DirectionalLight(0xffffff, 1.6); front.position.set(20, 20, 140);  scene.add(front);
+  // matte light rig (no IBL -> renders everywhere, incl. headless)
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x9a968c, 2.1));
+  const key  = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(45, 80, 95);  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 1.1); fill.position.set(-70, 25, 40); scene.add(fill);
+  const rim  = new THREE.DirectionalLight(0xffe7cc, 1.2); rim.position.set(10, -50, -90); scene.add(rim);
 
   const root = new THREE.Group(); scene.add(root);
   const ctl = new OrbitControls(cam, renderer.domElement);
   ctl.enablePan = false; ctl.enableDamping = true; ctl.dampingFactor = 0.08;
-  ctl.autoRotate = true; ctl.autoRotateSpeed = 1.3;
+  ctl.autoRotate = true; ctl.autoRotateSpeed = 1.0;
 
-  const shellTop = new THREE.MeshStandardMaterial({ color:0x6b7688, metalness:0.1, roughness:0.6 });
-  const shellBot = new THREE.MeshStandardMaterial({ color:0x444b5a, metalness:0.1, roughness:0.62 });
-  const btnMat   = new THREE.MeshStandardMaterial({ color:0x9b7cff, metalness:0.1, roughness:0.45 });
-  const pcbMat   = new THREE.MeshStandardMaterial({ color:0x0e3a2c, metalness:0.2, roughness:0.55 });
-  const batMat   = new THREE.MeshStandardMaterial({ color:0x3b3f48, metalness:0.45, roughness:0.4 });
+  // materials
+  const caseMat   = new THREE.MeshStandardMaterial({ color:0xcdd6dd, metalness:0.0, roughness:0.6 });
+  const btnMat    = new THREE.MeshStandardMaterial({ color:0xff5a1f, metalness:0.0, roughness:0.5 });
+  const boardMat  = new THREE.MeshStandardMaterial({ color:0x23252b, metalness:0.1, roughness:0.7 });
+  const moduleMat = new THREE.MeshStandardMaterial({ color:0x3a3d44, metalness:0.6, roughness:0.35 });
+  const blackMat  = new THREE.MeshStandardMaterial({ color:0x141519, metalness:0.2, roughness:0.6 });
+  const metalMat  = new THREE.MeshStandardMaterial({ color:0xbcc0c8, metalness:0.7, roughness:0.32 });
+  const batMat    = new THREE.MeshStandardMaterial({ color:0x6b7486, metalness:0.45, roughness:0.4 });
+  const sdMat     = new THREE.MeshStandardMaterial({ color:0x274a6b, metalness:0.1, roughness:0.55 });
+  const goldMat   = new THREE.MeshStandardMaterial({ color:0xd9a441, metalness:0.7, roughness:0.35 });
+  const sdLabelMat= new THREE.MeshStandardMaterial({ color:0xd2d6db, metalness:0.0, roughness:0.7 });
 
-  // device screens cycled on the e-ink panel — same shots as the Product section
+  // e-ink screen images (cycled), unlit so they stay crisp
   const texLoader = new THREE.TextureLoader();
   const shots = ['assets/sim-home.png','assets/sim-list.png','assets/sim-detail.png','assets/sim-rec.png']
     .map(u => { const t = texLoader.load(u); t.colorSpace = THREE.SRGBColorSpace; return t; });
-  const screenMat = new THREE.MeshBasicMaterial({ map: shots[0] });   // unlit -> always crisp
+  const screenMat = new THREE.MeshBasicMaterial({ map: shots[0] });
+  const einkMat   = new THREE.MeshBasicMaterial({ color:0xffffff });   // bezel = same white as the screen images
 
-  const loader = new ThreeMFLoader();
-  const load = u => new Promise((res, rej) => loader.load(u, res, undefined, rej));
   const V = () => new THREE.Vector3();
-  const ctr = o => new THREE.Box3().setFromObject(o).getCenter(V());
-  const siz = o => new THREE.Box3().setFromObject(o).getSize(V());
+  const box = o => new THREE.Box3().setFromObject(o);
 
-  // explode state: each mover lerps between assembled (a) and exploded (e) positions
   const movers = [];
   const mover = (o, ex) => movers.push({ o, a: o.position.clone(), e: o.position.clone().add(ex) });
   let explodeT = 0, explodeTarget = 0;
 
-  Promise.all([
-    load('assets/case/back_housing.3mf'),
-    load('assets/case/front_housing.3mf'),
-    load('assets/case/button.3mf')
-  ]).then(([back, front, btn]) => {
-    [[back, shellBot], [front, shellTop], [btn, btnMat]].forEach(([o, m]) =>
-      o.traverse(x => { if (x.isMesh) { x.material = m; x.geometry.computeVertexNormals(); } }));
+  new GLTFLoader().load('assets/case/assembled.glb', (gltf) => {
+    const part = {};
+    gltf.scene.traverse(o => { if (o.isMesh) { part[o.name] = o; o.material =
+      (o.name === 'button1' || o.name === 'button2') ? btnMat : caseMat; } });
+    root.add(gltf.scene);
 
-    // back + buttons are already mated in the file's coords; front was shifted aside
-    // for printing -> overlay it on the back footprint, flip it and close on top.
-    root.add(back, btn);
-    const cB = ctr(back), sB = siz(back), cF = ctr(front), sF = siz(front);
-    const piv = new THREE.Group();
-    front.position.sub(cF); piv.add(front);
-    piv.rotation.x = Math.PI;
-    piv.position.set(cB.x, cB.y, cB.z + sB.z / 2 + sF.z / 2);
-    root.add(piv);
+    // CAD axes: X = width, Y = height (screen up / chin down), Z = thickness (front +z, back -z)
+    const cb = box(gltf.scene), cc = cb.getCenter(V());
+    const bx = cc.x, frontZ = cb.max.z, backZ = cb.min.z, midZ = (frontZ + backZ) / 2;
 
-    const seamZ = cB.z + sB.z / 2, scrY = cB.y + 3;
-    // hardware inside: PCB, Li-battery, and the cycling e-ink screen
-    const pcb = new THREE.Mesh(new THREE.BoxGeometry(Math.min(sB.x, sF.x) - 7, Math.min(sB.y, sF.y) - 7, 2.0), pcbMat);
-    pcb.position.set(cB.x, cB.y, seamZ - 1.5); root.add(pcb);
-    const bat = new THREE.Mesh(new THREE.BoxGeometry(Math.min(sB.x, sF.x) - 12, Math.min(sB.y, sF.y) - 16, 5), batMat);
-    bat.position.set(cB.x, cB.y - 4, seamZ - 5.5); root.add(bat);
-    const screen = new THREE.Mesh(new THREE.PlaneGeometry(31, 31), screenMat);
-    screen.position.set(cB.x, scrY, seamZ + sF.z - 0.9); root.add(screen);
+    // ---- faithful internals (model mm space) -------------------------
+    // PCB
+    const board = new THREE.Group();
+    const pcb = new THREE.Mesh(new THREE.BoxGeometry(38, 50, 1.6), boardMat); board.add(pcb);
+    const add = (w,h,d, x,y,z, m) => { const e=new THREE.Mesh(new THREE.BoxGeometry(w,h,d), m); e.position.set(x,y,z); board.add(e); return e; };
+    add(21, 16, 2.4,  0,  6,  2.0, moduleMat);   // ESP32-S3-PICO-1 module (center-upper)
+    add(4.5, 24, 5.0, 15,  0,  3.0, blackMat);   // 2x6 GPIO header (right edge)
+    add(9, 9, 3.3, -0.85, -24.8, 0.1, metalMat); // USB-C — aligned to the real bottom cutout (x=-1.4,z=-9.8)
+    add(6, 5, 1.2,   11, 13,  1.5, boardMat);    // ES8311
+    add(5, 4, 1.0,  -12,  1,  1.4, boardMat);    // RTC
+    add(5, 4, 1.0,   -4,  1,  1.4, boardMat);    // PMIC
+    add(16, 2, 0.6,   0, 22,  1.4, btnMat);      // antenna trace hint (top)
+    board.position.set(bx, cc.y, midZ + 2.0);
 
-    // center the assembly at origin
-    const box = new THREE.Box3().setFromObject(root);
-    const sph = box.getBoundingSphere(new THREE.Sphere());
-    const r = sph.radius, c = sph.center;
-    root.position.sub(c); ctl.target.set(0, 0, 0);
+    // microSD card — real shape (chamfered corner + gold contacts), flush in the side slot
+    const sd = new THREE.Group();
+    const sdShape = new THREE.Shape();
+    sdShape.moveTo(-7.5,-5.5); sdShape.lineTo(7.5,-5.5); sdShape.lineTo(7.5,2.8);
+    sdShape.lineTo(4.7,5.5); sdShape.lineTo(-7.5,5.5); sdShape.closePath();   // cut corner
+    const sdGeo = new THREE.ExtrudeGeometry(sdShape, {depth:0.9, bevelEnabled:false});
+    sdGeo.translate(0,0,-0.45); sdGeo.computeVertexNormals();
+    sd.add(new THREE.Mesh(sdGeo, sdMat));                         // card body
+    for (let i=0;i<7;i++){ const pad=new THREE.Mesh(new THREE.BoxGeometry(2.4,0.7,0.25), goldMat);
+      pad.position.set(4.8, -3.3+i*1.1, -0.5); sd.add(pad); }     // contacts at the inserted end
+    const sdLbl=new THREE.Mesh(new THREE.BoxGeometry(8,4.5,0.06), sdLabelMat);
+    sdLbl.position.set(-1.5,0,0.48); sd.add(sdLbl);               // printed label patch
+    sd.position.set(13.8, -4.4, -11.6);                          // outer end flush with case side
 
-    // exploded offsets (along the case-thickness Z; buttons out in X)
-    mover(piv,    new THREE.Vector3(0, 0,  24));
-    mover(screen, new THREE.Vector3(0, 0,  16));
-    mover(pcb,    new THREE.Vector3(0, 0,   3));
-    mover(bat,    new THREE.Vector3(0, 0, -12));
-    mover(back,   new THREE.Vector3(0, 0, -24));
-    mover(btn,    new THREE.Vector3(28, 0, 10));
+    // e-ink module — light "paper" frame fills the window; the image sits a bit smaller
+    // inside it (real bezel margin) so it doesn't look oversized, and no dark PCB shows
+    const sm = blackMat;
+    const screen = new THREE.Group();
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(30.0, 30.6, 0.8),
+      [sm, sm, sm, sm, einkMat, sm]);     // +Z face = light e-ink paper, fills the window
+    const img = new THREE.Mesh(new THREE.PlaneGeometry(26.8, 27.4), screenMat);
+    img.position.set(0, 0, 0.42);          // the active e-ink image, centered with a margin
+    screen.add(frame, img);
+    screen.position.set(-1.60, -11.75, frontZ - 0.55);
 
-    // fit camera a bit wider so the exploded view also fits
-    const dist = r / Math.sin((cam.fov * Math.PI / 180) / 2) * 1.35;
-    cam.position.set(dist * 0.42, dist * 0.30, dist * 0.92);
-    cam.near = r / 100; cam.far = r * 100; cam.updateProjectionMatrix();
-    ctl.minDistance = r * 1.1; ctl.maxDistance = r * 5;
+    // Li-ion battery (behind board)
+    const bat = new THREE.Mesh(new THREE.BoxGeometry(34, 40, 4), batMat);
+    bat.position.set(bx, cc.y - 6, midZ - 5.5);
 
-    // cycle the device screens
+    root.add(board, screen, bat, sd);
+
+    // center everything at origin
+    const all = box(root), c = all.getBoundingSphere(new THREE.Sphere());
+    const r = c.radius; root.position.sub(c.center); ctl.target.set(0,0,0);
+
+    // exploded offsets — along thickness Z; buttons pop out +X (their real side)
+    mover(part.front,   new THREE.Vector3(0,0, 36));
+    mover(screen,       new THREE.Vector3(0,0, 23));
+    mover(board,        new THREE.Vector3(0,0, 7));
+    mover(bat,          new THREE.Vector3(0,0,-15));
+    mover(part.back,    new THREE.Vector3(0,0,-34));
+    if (part.button1) mover(part.button1, new THREE.Vector3(34,0,2));
+    if (part.button2) mover(part.button2, new THREE.Vector3(34,0,2));
+    mover(sd, new THREE.Vector3(42,0,0));   // card slides out the side
+
+    // fit camera (front-ish 3/4 view)
+    const dist = r / Math.sin((cam.fov * Math.PI/180)/2) * 1.3;
+    cam.position.set(dist*0.62, dist*0.24, dist*0.75);
+    cam.near = r/100; cam.far = r*100; cam.updateProjectionMatrix();
+    ctl.minDistance = r*1.05; ctl.maxDistance = r*5;
+
+    // cycle the e-ink screen
     let si = 0;
-    setInterval(() => { si = (si + 1) % shots.length; screenMat.map = shots[si]; screenMat.needsUpdate = true; }, 2600);
+    setInterval(() => { si = (si+1) % shots.length; screenMat.map = shots[si]; screenMat.needsUpdate = true; }, 2600);
 
-    // assembled <-> exploded toggle
     document.querySelectorAll('.vmode').forEach(b => b.addEventListener('click', () => {
       document.querySelectorAll('.vmode').forEach(x => x.classList.toggle('is-active', x === b));
       explodeTarget = b.dataset.mode === 'exploded' ? 1 : 0;
     }));
 
     mount.classList.add('ready');
-  }).catch(err => { console.error('3MF load failed', err); mount.classList.add('failed'); });
+  }, undefined, (err) => { console.error('GLB load failed', err); mount.classList.add('failed'); });
 
   function resize() {
     const w = mount.clientWidth, h = mount.clientHeight || 420;
