@@ -19,6 +19,19 @@
   const pad = (n) => String(n).padStart(2, '0');
   const mmss = (s) => pad(Math.floor(s / 60)) + ':' + pad(Math.round(s) % 60);
   const esc = (s) => (s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  // display name follows the Settings "Name format" (st.fmt), derived from the note date + index
+  function noteName(n, idx) {
+    const d = new Date(n.createdAt || Date.now()), num = String(idx || 0).padStart(4, '0');
+    const mon = d.toLocaleDateString('en-US', { month: 'short' });
+    switch (st.fmt) {
+      case 2: return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      case 3: return `note-${num}`;
+      case 4: return `${pad(d.getDate())}/${pad(d.getMonth() + 1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      case 5: return `Rec ${num}`;
+      default: return `${mon} ${pad(d.getDate())}, ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+  }
+  const noteIdx = (n) => cache.findIndex(x => x.id === n.id) + 1;
 
   // hand-drawn e-ink icons (currentColor → invert with the button/band)
   const ic = (p, fill) => `<svg class="dic" viewBox="0 0 24 24" width="18" height="18" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
@@ -78,8 +91,9 @@
         const idx = st.page * PAGE + i + 1;
         return `<div class="lrow" data-act="open" data-arg="${n.id}">
           <span class="lnum">${String(idx).padStart(4, '0')}</span>
-          <span class="ltitle"><span class="mq">${esc(n.title)}${n.fav ? ' ★' : ''}</span></span>
-          ${n.status !== 'transcribed' ? '<span class="ldot">●</span>' : ''}</div>`;
+          <span class="ltitle"><span class="mq">${esc(noteName(n, idx))}${n.fav ? ' ★' : ''}</span></span>
+          ${n.status !== 'transcribed' ? '<span class="ldot">●</span>' : ''}
+          <span class="ltime">${mmss(n.secs)}</span></div>`;
       }).join('') || `<div class="lempty">No notes yet —<br>tap REC and speak</div>`;
       const multi = pages > 1;
       return `<div class="s-list">
@@ -87,6 +101,7 @@
         <div class="lsub">${cache.length} note${cache.length === 1 ? '' : 's'} · ${st.page + 1}/${pages}</div>
         <div class="lrows">${rows}</div>
         <div class="lfoot">
+          <button class="ebtn sm" data-act="home">Back</button>
           ${multi ? `<button class="ebtn sm" data-act="pageUp">${DI.up}</button>` : ''}
           <button class="ebtn rec" data-act="rec">${DI.rec}<span>REC</span></button>
           ${multi ? `<button class="ebtn sm" data-act="pageDown">${DI.down}</button>` : ''}</div></div>`;
@@ -107,7 +122,7 @@
         ? `<div class="d-scroll${st.scrollPaused ? ' paused' : ''}" data-act="toggleScroll"><div class="d-track"><p>${esc(n.transcript)}</p></div></div>`
         : `<div class="d-pending" data-act="toggleScroll">Pending transcription.<br>Transcribe it in the web dashboard.</div>`;
       return `<div class="s-detail">
-        <div class="d-title"><span class="mq">${esc(n.title)}</span></div><div class="d-line"></div>
+        <div class="d-title"><span class="mq">${esc(noteName(n, noteIdx(n)))}</span></div><div class="d-line"></div>
         ${body}
         <div class="d-foot">
           <button class="ebtn" data-act="play">${DI.play}</button>
@@ -117,7 +132,7 @@
     player() {
       const n = cache.find(x => x.id === st.sel); if (!n) return screens.list();
       return `<div class="s-player">
-        <div class="d-title"><span class="mq">${esc(n.title)}</span></div>
+        <div class="d-title"><span class="mq">${esc(noteName(n, noteIdx(n)))}</span></div>
         <div class="p-state" id="pState">${player.on ? 'Playing' : 'Paused'}</div>
         <div class="p-bar"><i id="pBar" style="width:0%"></i></div>
         <div class="p-time"><span id="pElapsed">00:00</span><span id="pTotal">${mmss(n.secs)}</span></div>
@@ -151,9 +166,9 @@
     },
     confirm() {
       const n = cache.find(x => x.id === st.sel) || {};
-      return `<div class="s-detail"><div class="d-title"><span>${esc(n.title || '')}</span></div><div class="d-line"></div><div class="d-pending">…</div></div>
+      return `<div class="s-detail"><div class="d-title"><span>${esc(noteName(n, noteIdx(n)))}</span></div><div class="d-line"></div><div class="d-pending">…</div></div>
         <div class="s-modal"><div class="s-mbox"><b>Delete this note?</b>
-          <div class="s-mname">${esc(n.title || '')}</div><div class="s-mhint">This cannot be undone.</div>
+          <div class="s-mname">${esc(noteName(n, noteIdx(n)))}</div><div class="s-mhint">This cannot be undone.</div>
           <div class="s-mbtns"><button class="ebtn" data-act="delyes">Delete</button><button class="ebtn" data-act="delno">Cancel</button></div></div></div>`;
     },
   };

@@ -80,8 +80,8 @@ const I18N = {
     "sim.eyebrow":"Simulador","sim.title":"Experimente o aparelho","sim.hint":"Toque em REC e fale — ele pede acesso ao microfone. A transcrição vem depois, no Dashboard.",
     "sim.sub":"É o firmware e-ink rodando no navegador, de verdade: o REC grava o áudio do microfone e a nota fica pendente. Você transcreve no Dashboard e a transcrição aparece aqui.",
     "priv.lead":"100% no seu navegador —",
-    "priv.sim":"as gravações e transcrições ficam guardadas só aqui (IndexedDB). Nada é enviado para a nuvem nem para nenhum servidor.",
-    "priv.dash":"as gravações ficam só aqui, não vão para a nuvem. A transcrição é opcional: se você usá-la, o áudio vai direto para a OpenAI com a sua chave; nada passa por servidores nossos.",
+    "priv.sim":"as gravações e transcrições ficam salvas aqui, no seu próprio navegador. Nada é enviado para a nuvem nem para nenhum servidor.",
+    "priv.dash":"as gravações ficam salvas só no seu navegador, não vão para a nuvem. A transcrição é opcional: se você usá-la, o áudio vai direto para a OpenAI com a sua chave; nada passa por servidores nossos.",
     "inside.eyebrow":"Hardware",
     "inside.title":"O que tem dentro",
     "inside.sub":"Desenho técnico da placa ESP32-S3-ePaper-1.54 (variante touch) e da carcaça impressa em 3D — e-Paper na frente, botões na lateral.",
@@ -180,8 +180,8 @@ const I18N = {
     "sim.eyebrow":"Simulator","sim.title":"Try the device","sim.hint":"Tap REC and speak — it asks for microphone access. Transcription happens later, in the Dashboard.",
     "sim.sub":"The e-ink firmware in your browser — for real: REC records audio from the mic (the note stays pending). You transcribe it in the Dashboard and the transcript shows up here.",
     "priv.lead":"100% in your browser —",
-    "priv.sim":"recordings and transcripts are kept right here (IndexedDB). Nothing is sent to the cloud or any server.",
-    "priv.dash":"recordings stay here, never going to the cloud. Transcription is optional: if you use it, the audio goes straight to OpenAI with your own key; nothing passes through our servers.",
+    "priv.sim":"recordings and transcripts are saved right here, in your own browser. Nothing is sent to the cloud or any server.",
+    "priv.dash":"recordings are saved only in your browser, never going to the cloud. Transcription is optional: if you use it, the audio goes straight to OpenAI with your own key; nothing passes through our servers.",
     "inside.eyebrow":"Hardware",
     "inside.title":"What's Inside",
     "inside.sub":"A technical drawing of the real ESP32-S3-ePaper-1.54 board (touch variant) and the 3D-printed case — e-Paper on the front, buttons on the side.",
@@ -271,6 +271,8 @@ document.querySelectorAll("#themeSw .theme-sw__opt").forEach(b=>
          || (localStorage.getItem("sn-eink") === "1" ? "eink" : "datasheet");   // migrate old pref
   } catch(e){}
   if (/[?&]eink=1/.test(location.search)) mode = "eink";   // shareable e-ink link
+  const tp = (location.search.match(/[?&]theme=(datasheet|dark|eink)/) || [])[1];
+  if (tp) mode = tp;                                        // shareable theme link (?theme=dark)
   applyTheme(mode);
 })();
 

@@ -23,15 +23,31 @@
 </p>
 
 <p align="center">
-  <img src="docs/preview.png" alt="Sapiens Note website — preview" width="860">
+  <img src="docs/preview.png" alt="Tema Datasheet" width="100%"><br>
+  <sub><b>Datasheet</b> — tema padrão</sub>
 </p>
 
-<table align="center">
-  <tr>
-    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Datasheet</b> (padrão)</sub></td>
-    <td align="center"><img src="docs/preview-eink.png" width="380"><br><sub><b>Modo e-ink</b> (um clique)</sub></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="docs/preview-eink.png" alt="Tema E-ink" width="100%"><br>
+  <sub><b>E-ink</b> — um clique</sub>
+</p>
+
+<p align="center">
+  <img src="docs/preview-dark.png" alt="Tema Escuro" width="100%"><br>
+  <sub><b>Escuro</b> — um clique</sub>
+</p>
+
+<p align="center"><b>Dois demos reais e funcionais no navegador — sem hardware</b></p>
+
+<p align="center">
+  <img src="docs/dashboard.png" alt="Dashboard" width="100%"><br>
+  <sub><b>Dashboard</b> — grava → transcreve → lê de volta</sub>
+</p>
+
+<p align="center">
+  <img src="docs/sim.png" alt="Simulador do firmware" width="360"><br>
+  <sub><b>Simulador do firmware</b> — o aparelho e-ink no navegador</sub>
+</p>
 
 ---
 
@@ -73,6 +89,25 @@ Conteúdo e specs montados a partir do projeto **Sapiens Note** e da placa real
 
 **Seções:** `Hero` · `Simulador` · `Dashboard` · `Produto` · `Recursos` · `Como funciona`
 · `Sapiens Web` · `Comparação` · `What's Inside` · `Live 3D` · `Specs` · `FAQ` · `CTA`
+
+## 🕹️ Simulador do firmware & dashboard
+
+Dois demos **reais** no navegador deixam qualquer um experimentar o produto inteiro sem hardware:
+
+- **Simulador do firmware** (`public/js/simulator.js`) — uma reimplementação em DOM/CSS da
+  UI do firmware e-ink: uma **máquina de estados** de telas preto-no-branco (Home · Lista ·
+  Gravando · Transcrição · Player · Settings · Sync · Tags · Excluir) com ícones desenhados
+  em SVG, o **flash de inversão** e-ink ao toque, marquee nos títulos, paginação e indicador
+  de bateria. O **REC** grava de verdade do seu microfone (`MediaRecorder`); a nota é salva
+  como *pendente* — o aparelho só captura, igual ao firmware real — e toca de verdade.
+- **Dashboard** (`public/js/dashboard.js`) — um porte fiel da ferramenta real `sapiens-web`
+  que lê o **mesmo** armazenamento IndexedDB: toca cada gravação com **espectro** de áudio ao
+  vivo, transcreve via **OpenAI Whisper** (sua chave, só no navegador), baixa `.wav` / `.txt`
+  reais, exclui e pagina.
+
+**O fluxo é o real:** grava no aparelho → transcreve no dashboard → a transcrição volta a
+aparecer no aparelho, tudo por um armazenamento compartilhado (`public/js/store.js`). Nada sai
+do seu navegador, exceto a transcrição opcional (veja *Onde ficam os seus dados*).
 
 ## 🛠️ Stack
 

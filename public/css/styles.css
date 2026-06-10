@@ -690,12 +690,13 @@ body.dark .browser__url{color:var(--muted);background:transparent}
    Device simulator (#simDevice) — screen is always monochrome e-ink
    ============================================================ */
 .sim-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
-.sim-device{display:flex;align-items:flex-start;justify-content:center}
+.sim-device{display:flex;align-items:stretch;justify-content:center}
 .sim-shell{position:relative;width:min(360px,84vw);padding:24px 22px 28px;border-radius:34px;
   background:var(--paper);border:1px solid var(--line);box-shadow:8px 8px 0 var(--ink)}
 .sim-feet{display:flex;justify-content:center;gap:16px;margin-top:14px}
 .sim-feet span{width:46px;height:6px;border-radius:6px;background:var(--ink);opacity:.22}
-.sim-side{display:flex;flex-direction:column;gap:18px;margin-top:54px}
+/* REC / BACK as side tabs on the right, sitting in the lower half of the device */
+.sim-side{display:flex;flex-direction:column;justify-content:flex-end;gap:16px;padding-bottom:42px}
 .sim-sbtn{writing-mode:vertical-rl;border:1px solid var(--line);background:var(--paper);color:var(--ink);
   font:700 .6rem var(--mono);letter-spacing:.14em;padding:16px 6px;border-radius:0 9px 9px 0;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
 .sim-sbtn:active{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink)}
@@ -739,6 +740,7 @@ body.dark .browser__url{color:var(--muted);background:transparent}
 .ltitle{flex:1;min-width:0;overflow:hidden}
 .ltitle .mq{display:inline-block;white-space:nowrap}
 .ldot{font-size:.8rem;line-height:1}
+.ltime{font:700 .66rem ui-monospace,monospace;color:#333;flex:0 0 auto;font-variant-numeric:tabular-nums}
 .lempty{flex:1;display:grid;place-items:center;color:#444;font-size:.85rem;text-align:center}
 .lfoot{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:8px}
 

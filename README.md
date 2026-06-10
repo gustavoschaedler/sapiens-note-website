@@ -23,15 +23,31 @@
 </p>
 
 <p align="center">
-  <img src="docs/preview.png" alt="Sapiens Note website — preview" width="860">
+  <img src="docs/preview.png" alt="Datasheet theme" width="100%"><br>
+  <sub><b>Datasheet</b> — default theme</sub>
 </p>
 
-<table align="center">
-  <tr>
-    <td align="center"><img src="docs/preview.png" width="380"><br><sub><b>Datasheet</b> (default)</sub></td>
-    <td align="center"><img src="docs/preview-eink.png" width="380"><br><sub><b>E-ink mode</b> (one click)</sub></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="docs/preview-eink.png" alt="E-ink theme" width="100%"><br>
+  <sub><b>E-ink</b> — one click</sub>
+</p>
+
+<p align="center">
+  <img src="docs/preview-dark.png" alt="Dark theme" width="100%"><br>
+  <sub><b>Dark</b> — one click</sub>
+</p>
+
+<p align="center"><b>Two real, working browser demos — no hardware needed</b></p>
+
+<p align="center">
+  <img src="docs/dashboard.png" alt="Dashboard" width="100%"><br>
+  <sub><b>Dashboard</b> — record → transcribe → read back</sub>
+</p>
+
+<p align="center">
+  <img src="docs/sim.png" alt="Firmware simulator" width="360"><br>
+  <sub><b>Firmware simulator</b> — the e-ink device, in your browser</sub>
+</p>
 
 ---
 
@@ -73,6 +89,26 @@ Content and specs are based on the **Sapiens Note** project and the real
 
 **Sections:** `Hero` · `Simulator` · `Dashboard` · `Product` · `Features` · `How it works`
 · `Sapiens Web` · `Compare` · `What's Inside` · `Live 3D` · `Specs` · `FAQ` · `CTA`
+
+## 🕹️ Firmware simulator & dashboard
+
+Two **real** browser demos let anyone try the whole product with no hardware:
+
+- **Firmware simulator** (`public/js/simulator.js`) — a DOM/CSS reimplementation of the
+  e-ink firmware UI: a black-on-white screen **state machine** (Home · Note list ·
+  Recording · Transcript · Player · Settings · Sync · Tags · Delete) with hand-drawn SVG
+  icons, the on-tap e-ink **invert flash**, marquee titles, pagination and a battery
+  indicator. **REC** actually records from your microphone (`MediaRecorder`); the note is
+  saved as *pending* — the device only captures, exactly like the real firmware — and
+  plays back for real.
+- **Dashboard** (`public/js/dashboard.js`) — a faithful port of the real `sapiens-web`
+  tool that reads the **same** IndexedDB store: plays each recording with a live audio
+  **spectrum**, transcribes via **OpenAI Whisper** (your key, browser-only), downloads
+  real `.wav` / `.txt`, deletes and paginates.
+
+**The flow is the real one:** record on the device → transcribe in the dashboard → the
+transcript shows back on the device, all through a shared store (`public/js/store.js`).
+Nothing leaves your browser except the optional transcription (see *Where your data lives*).
 
 ## 🛠️ Stack
 
